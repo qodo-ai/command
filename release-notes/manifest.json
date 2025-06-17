@@ -1,0 +1,17 @@
+{
+  "files": [
+    "release-notes-v0.1.128.html"
+  ],
+  "lastUpdated": "2024-12-15T15:45:00Z",
+  "description": "Manifest file for release notes - automatically updated by the release notes agent",
+  "count": 1,
+  "latestVersion": "0.1.128",
+  "versions": [
+    {
+      "version": "0.1.128",
+      "file": "release-notes-v0.1.128.html",
+      "date": "2024-12-15",
+      "title": "Release Notes v0.1.128"
+    }
+  ]
+}
