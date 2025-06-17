@@ -9,16 +9,20 @@ inputs:
   model:
     description: 'Specify a custom model to use'
     required: false
-  agentfile:
+  agent-file:
     description: 'Path to custom agent.toml file (defaults to the example agent.toml included with this action)'
     required: false
+  agentfile:
+    description: 'DEPRECATED: Use agent-file instead. Path to custom agent.toml file'
+    required: false
+    deprecationMessage: 'The agentfile input has been deprecated. Please use agent-file instead.'
   key-value-pairs:
     description: 'Additional key-value pairs as JSON object or multiline string (e.g., {"key1": "value1", "key2": "value2"} or key1=value1 key2=value2)'
     required: false
   qodo-version:
     description: 'Version of @qodo/gen to install (defaults to 0.1.122)'
     required: false
-    default: '0.1.122'
+    default: 'latest'
 
 runs:
   using: 'composite'
@@ -83,33 +87,39 @@ runs:
           QODO_CMD="$QODO_CMD --model=${{ inputs.model }}"
         fi
         
-        # Add agentfile - use default if not specified
-        if [ ! -z "${{ inputs.agentfile }}" ]; then
-          QODO_CMD="$QODO_CMD --agentfile=${{ inputs.agentfile }}"
+        # Add agent-file - handle both new and old parameter names for backward compatibility
+        AGENT_FILE=""
+        if [ ! -z "${{ inputs.agent-file }}" ]; then
+          AGENT_FILE="${{ inputs.agent-file }}"
+        elif [ ! -z "${{ inputs.agentfile }}" ]; then
+          echo "::warning::The 'agentfile' input is deprecated. Please use 'agent-file' instead."
+          AGENT_FILE="${{ inputs.agentfile }}"
+        fi
+        
+        if [ ! -z "$AGENT_FILE" ]; then
+          QODO_CMD="$QODO_CMD --agent-file=$AGENT_FILE"
         else
-          # Use default agentfile from action directory
-          QODO_CMD="$QODO_CMD --agentfile=${{ github.action_path }}/examples/agent.toml"
+          # Use default agent-file from action directory
+          QODO_CMD="$QODO_CMD --agent-file=${{ github.action_path }}/examples/agent.toml"
         fi
         
         # Parse and add key-value pairs
         if [ ! -z "${{ inputs.key-value-pairs }}" ]; then
           # Check if input is JSON format
           if echo "${{ inputs.key-value-pairs }}" | jq -e . >/dev/null 2>&1; then
-            # Parse JSON and convert to --key=value format
-            PAIRS=$(echo "${{ inputs.key-value-pairs }}" | jq -r 'to_entries | .[] | "--\(.key)=\(.value)"' | tr '\n' ' ')
+            # Parse JSON and convert to --set key=value format
+            PAIRS=$(echo "${{ inputs.key-value-pairs }}" | jq -r 'to_entries | .[] | "--set \(.key)=\(.value)"' | tr '\n' ' ')
             QODO_CMD="$QODO_CMD $PAIRS"
           else
             # Assume it's in key=value format separated by spaces or newlines
-            # Convert each key=value to --key=value
+            # Convert each key=value to --set key=value
             PAIRS=""
             while IFS= read -r line; do
               # Skip empty lines
               if [ ! -z "$line" ]; then
-                # Check if line already starts with --
-                if [[ "$line" != --* ]]; then
-                  PAIRS="$PAIRS --$line"
-                else
-                  PAIRS="$PAIRS $line"
+                # Extract key and value from key=value format
+                if [[ "$line" == *"="* ]]; then
+                  PAIRS="$PAIRS --set $line"
                 fi
               fi
             done <<< "${{ inputs.key-value-pairs }}"
