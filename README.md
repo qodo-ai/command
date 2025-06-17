@@ -98,7 +98,7 @@ qodo login           # Authenticate
 qodo chat            # Start interactive agent session (Qodo Gen)
 qodo init            # Generate a customizable agent template
 qodo <command>       # Run your configured agent
-qodo mcp-list        # List all available tools
+qodo list-mcp        # List all available tools
 qodo models          # List supported AI models
 ```
 
