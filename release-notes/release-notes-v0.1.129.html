@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qodo CLI - Release Notes v0.1.128</title>
+    <title>Qodo CLI - Release Notes v0.1.129</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -323,31 +323,25 @@
 </head>
 <body>
     <div class="header">
-        <h1>Release Notes v0.1.128</h1>
-        <p class="release-date">Released: 2024-12-15</p>
-        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-            <a href="../index.html" class="github-link">
-                <i class="far fa-arrow-left"></i>
-                Back to Release Notes Index
-            </a>
-            <a href="https://github.com/qodo-ai/qodo-cli/releases/tag/v0.1.128" class="github-link" target="_blank">
-                <i class="fab fa-github"></i>
-                View on GitHub
-            </a>
-        </div>
+        <h1>Release Notes v0.1.129</h1>
+        <p class="release-date">Released: 2025-06-16</p>
+        <a href="https://github.com/qodo-ai/qodo-cli/releases/tag/v0.1.129" class="github-link" target="_blank">
+            <i class="fab fa-github"></i>
+            View on GitHub
+        </a>
     </div>
     
     <div class="summary">
         <h2>Summary</h2>
-        <p>This release includes improvements to the release notes agent and website infrastructure.</p>
+        <p>This release introduces a comprehensive automated release notes generation system and includes various documentation improvements and configuration updates. The major highlight is the new release notes agent that automatically generates professional release notes from GitHub pull requests and commits.</p>
         
         <h3 style="margin-top: 20px; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;"><i class="far fa-heart"></i> Contributors</h3>
         <div class="contributors-grid">
             <div class="contributor">
-                <img src="https://github.com/adamwalker.png?size=40" alt="adamwalker" class="contributor-avatar">
+                <img src="https://github.com/AdamWalker-112358.png?size=40" alt="AdamWalker-112358" class="contributor-avatar">
                 <div class="contributor-info">
                     <div class="contributor-name">Adam Walker</div>
-                    <div class="contributor-username">@adamwalker</div>
+                    <div class="contributor-username">@AdamWalker-112358</div>
                 </div>
             </div>
         </div>
@@ -362,7 +356,7 @@
             <i class="far fa-lightbulb"></i>
             Features
         </div>
-        <div class="tab" onclick="showTab('fixes')">
+        <div class="tab hidden" onclick="showTab('fixes')">
             <i class="far fa-times-circle"></i>
             Bug Fixes
         </div>
@@ -370,7 +364,7 @@
             <i class="far fa-stop-circle"></i>
             Breaking Changes
         </div>
-        <div class="tab hidden" onclick="showTab('docs')">
+        <div class="tab" onclick="showTab('docs')">
             <i class="far fa-file-alt"></i>
             Documentation
         </div>
@@ -378,15 +372,15 @@
             <i class="far fa-clock"></i>
             Performance
         </div>
-        <div class="tab hidden" onclick="showTab('refactor')">
+        <div class="tab" onclick="showTab('refactor')">
             <i class="far fa-edit"></i>
             Refactoring
         </div>
-        <div class="tab hidden" onclick="showTab('deps')">
+        <div class="tab" onclick="showTab('deps')">
             <i class="far fa-square"></i>
             Dependencies
         </div>
-        <div class="tab hidden" onclick="showTab('other')">
+        <div class="tab" onclick="showTab('other')">
             <i class="far fa-circle"></i>
             Other
         </div>
@@ -395,7 +389,7 @@
     <div id="overview" class="tab-content active">
         <h2><i class="far fa-chart-bar"></i> Release Overview</h2>
         <div class="section">
-            <p>This release includes 3 changes across multiple categories. Navigate through the tabs above to explore specific types of changes.</p>
+            <p>This release includes 6 commits with changes across multiple categories. Navigate through the tabs above to explore specific types of changes.</p>
             <table class="changes-table" style="margin-top: 20px;">
                 <thead>
                     <tr>
@@ -407,12 +401,12 @@
                 <tbody>
                     <tr>
                         <td><i class="far fa-lightbulb"></i> Features</td>
-                        <td>2</td>
+                        <td>1</td>
                         <td>New functionality and enhancements</td>
                     </tr>
                     <tr>
                         <td><i class="far fa-times-circle"></i> Bug Fixes</td>
-                        <td>1</td>
+                        <td>0</td>
                         <td>Resolved issues and error corrections</td>
                     </tr>
                     <tr>
@@ -422,7 +416,7 @@
                     </tr>
                     <tr>
                         <td><i class="far fa-file-alt"></i> Documentation</td>
-                        <td>0</td>
+                        <td>2</td>
                         <td>Documentation updates and improvements</td>
                     </tr>
                     <tr>
@@ -432,27 +426,27 @@
                     </tr>
                     <tr>
                         <td><i class="far fa-edit"></i> Refactoring</td>
-                        <td>0</td>
+                        <td>1</td>
                         <td>Code structure and quality improvements</td>
                     </tr>
                     <tr>
                         <td><i class="far fa-square"></i> Dependencies</td>
-                        <td>0</td>
+                        <td>1</td>
                         <td>Dependency updates and changes</td>
                     </tr>
                     <tr>
                         <td><i class="far fa-circle"></i> Other</td>
-                        <td>0</td>
+                        <td>1</td>
                         <td>Miscellaneous changes and improvements</td>
                     </tr>
                 </tbody>
             </table>
             
-            <h3 style="margin-top: 40px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;"><i class="far fa-list-alt"></i> Pull Requests in this Release</h3>
+            <h3 style="margin-top: 40px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;"><i class="far fa-list-alt"></i> Commits in this Release</h3>
             <table class="changes-table">
                 <thead>
                     <tr>
-                        <th>PR</th>
+                        <th>Commit</th>
                         <th>Title</th>
                         <th>Type</th>
                         <th>Author</th>
@@ -460,22 +454,40 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td><a href="#" class="pr-link" target="_blank">#001</a></td>
-                        <td>Add release notes website infrastructure</td>
+                        <td><a href="https://github.com/qodo-ai/qodo-cli/commit/4458ed0" class="pr-link" target="_blank">4458ed0</a></td>
+                        <td>Modify release notes agent to publish to release-notes-website branch</td>
                         <td><span class="change-type">Feature</span></td>
-                        <td>@adamwalker</td>
+                        <td>@AdamWalker-112358</td>
                     </tr>
                     <tr>
-                        <td><a href="#" class="pr-link" target="_blank">#002</a></td>
-                        <td>Improve release notes agent to publish to dedicated branch</td>
-                        <td><span class="change-type">Feature</span></td>
-                        <td>@adamwalker</td>
+                        <td><a href="https://github.com/qodo-ai/qodo-cli/commit/9930eb5" class="pr-link" target="_blank">9930eb5</a></td>
+                        <td>Update to agent toml</td>
+                        <td><span class="change-type">Documentation</span></td>
+                        <td>@AdamWalker-112358</td>
                     </tr>
                     <tr>
-                        <td><a href="#" class="pr-link" target="_blank">#003</a></td>
-                        <td>Fix release notes generation workflow</td>
-                        <td><span class="change-type">Bug Fix</span></td>
-                        <td>@adamwalker</td>
+                        <td><a href="https://github.com/qodo-ai/qodo-cli/commit/26daf74" class="pr-link" target="_blank">26daf74</a></td>
+                        <td>Agent should use a template for consistent styling</td>
+                        <td><span class="change-type">Documentation</span></td>
+                        <td>@AdamWalker-112358</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://github.com/qodo-ai/qodo-cli/commit/a68d148" class="pr-link" target="_blank">a68d148</a></td>
+                        <td>Add HTML and Markdown Formatting to the agent toml</td>
+                        <td><span class="change-type">Refactoring</span></td>
+                        <td>@AdamWalker-112358</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://github.com/qodo-ai/qodo-cli/commit/9507075" class="pr-link" target="_blank">9507075</a></td>
+                        <td>Update the releas</td>
+                        <td><span class="change-type">Dependencies</span></td>
+                        <td>@AdamWalker-112358</td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://github.com/qodo-ai/qodo-cli/commit/23c3bb8" class="pr-link" target="_blank">23c3bb8</a></td>
+                        <td>First version of the release note agent</td>
+                        <td><span class="change-type">Other</span></td>
+                        <td>@AdamWalker-112358</td>
                     </tr>
                 </tbody>
             </table>
@@ -489,20 +501,15 @@
                 <thead>
                     <tr>
                         <th>Change</th>
-                        <th>PR</th>
+                        <th>Commit</th>
                         <th>Author</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Added release notes website infrastructure</td>
-                        <td><a href="#" class="pr-link" target="_blank">#001</a></td>
-                        <td>@adamwalker</td>
-                    </tr>
-                    <tr>
-                        <td>Improved release notes agent to publish to dedicated branch</td>
-                        <td><a href="#" class="pr-link" target="_blank">#002</a></td>
-                        <td>@adamwalker</td>
+                        <td><strong>Automated Release Notes Generation</strong><br>Added a complete release notes generation system with both markdown and HTML output formats. Includes new release notes agent with comprehensive templates and styling, GitHub workflow for automatic release notes generation on new releases, professional HTML output with tabbed navigation and responsive design, and integration with release-notes-website branch for publishing.</td>
+                        <td><a href="https://github.com/qodo-ai/qodo-cli/commit/4458ed0" class="pr-link" target="_blank">4458ed0</a></td>
+                        <td>@AdamWalker-112358</td>
                     </tr>
                 </tbody>
             </table>
@@ -510,66 +517,119 @@
     </div>
     
     <div id="fixes" class="tab-content">
+        <div class="empty-section">
+            No bug fixes in this release.
+        </div>
+    </div>
+    
+    <div id="breaking" class="tab-content">
+        <div class="empty-section">
+            No breaking changes in this release.
+        </div>
+    </div>
+    
+    <div id="docs" class="tab-content">
         <div class="section">
-            <h2><i class="far fa-times-circle"></i> Bug Fixes</h2>
+            <h2><i class="far fa-file-alt"></i> Documentation</h2>
             <table class="changes-table">
                 <thead>
                     <tr>
                         <th>Change</th>
-                        <th>PR</th>
+                        <th>Commit</th>
                         <th>Author</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Fixed release notes generation workflow</td>
-                        <td><a href="#" class="pr-link" target="_blank">#003</a></td>
-                        <td>@adamwalker</td>
+                        <td><strong>README Improvements</strong><br>Fixed grammar and formatting issues in the main README. Corrected "Qodo Merge, and Qodo Aware" to "Qodo Merge and Qodo Aware", simplified agent configuration documentation, and updated configuration file references for consistency.</td>
+                        <td><a href="https://github.com/qodo-ai/qodo-cli/commit/9930eb5" class="pr-link" target="_blank">9930eb5</a></td>
+                        <td>@AdamWalker-112358</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Agent Configuration Updates</strong><br>Various improvements to agent TOML files. Fixed typos in agent descriptions and instructions, updated output schema property names for consistency, and improved error handling in test generation agents.</td>
+                        <td><a href="https://github.com/qodo-ai/qodo-cli/commit/26daf74" class="pr-link" target="_blank">26daf74</a></td>
+                        <td>@AdamWalker-112358</td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
     
-    <div id="breaking" class="tab-content">
-        <div class="empty-section">
-            <p>No breaking changes in this release.</p>
-        </div>
-    </div>
-    
-    <div id="docs" class="tab-content">
-        <div class="empty-section">
-            <p>No documentation changes in this release.</p>
-        </div>
-    </div>
-    
     <div id="performance" class="tab-content">
         <div class="empty-section">
-            <p>No performance improvements in this release.</p>
+            No performance improvements in this release.
         </div>
     </div>
     
     <div id="refactor" class="tab-content">
-        <div class="empty-section">
-            <p>No refactoring changes in this release.</p>
+        <div class="section">
+            <h2><i class="far fa-edit"></i> Refactoring</h2>
+            <table class="changes-table">
+                <thead>
+                    <tr>
+                        <th>Change</th>
+                        <th>Commit</th>
+                        <th>Author</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Build Configuration</strong><br>Streamlined Docker and npm configurations. Simplified .dockerignore and .npmignore files, removed unnecessary build dependencies and scripts, and cleaned up package.json dependencies.</td>
+                        <td><a href="https://github.com/qodo-ai/qodo-cli/commit/a68d148" class="pr-link" target="_blank">a68d148</a></td>
+                        <td>@AdamWalker-112358</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     
     <div id="deps" class="tab-content">
-        <div class="empty-section">
-            <p>No dependency updates in this release.</p>
+        <div class="section">
+            <h2><i class="far fa-square"></i> Dependencies</h2>
+            <table class="changes-table">
+                <thead>
+                    <tr>
+                        <th>Change</th>
+                        <th>Commit</th>
+                        <th>Author</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Package Updates</strong><br>Reverted some dependency versions for stability. Restored eventsource to v4.0.0, removed unnecessary tar and yaml dependencies, and cleaned up package-lock.json inconsistencies.</td>
+                        <td><a href="https://github.com/qodo-ai/qodo-cli/commit/9507075" class="pr-link" target="_blank">9507075</a></td>
+                        <td>@AdamWalker-112358</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     
     <div id="other" class="tab-content">
-        <div class="empty-section">
-            <p>No other changes in this release.</p>
+        <div class="section">
+            <h2><i class="far fa-circle"></i> Other Changes</h2>
+            <table class="changes-table">
+                <thead>
+                    <tr>
+                        <th>Change</th>
+                        <th>Commit</th>
+                        <th>Author</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Configuration Cleanup</strong><br>Removed obsolete configuration files and examples. Deleted unused YAML agent example, removed ripgrep binary and download scripts (now using bundled version), and cleaned up test configuration files. Enhanced GitHub Actions workflows with release notes generation workflow and improved CI pipeline configuration.</td>
+                        <td><a href="https://github.com/qodo-ai/qodo-cli/commit/23c3bb8" class="pr-link" target="_blank">23c3bb8</a></td>
+                        <td>@AdamWalker-112358</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     
     <div class="footer">
         <p><em>This release notes file was generated automatically by the Qodo CLI release notes agent.</em></p>
-        <p style="margin-top: 10px; font-size: 0.8rem; color: #999;">Generated on December 15, 2024 at 3:45 PM UTC</p>
+        <p style="margin-top: 10px; font-size: 0.8rem; color: #999;">Generated on June 16, 2025 at 9:00 PM UTC</p>
     </div>
     
     <script>

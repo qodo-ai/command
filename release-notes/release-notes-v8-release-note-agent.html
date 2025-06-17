@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qodo CLI - Release Notes v0.1.128</title>
+    <title>Qodo CLI - Release Notes v8-release-note-agent</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -323,31 +323,25 @@
 </head>
 <body>
     <div class="header">
-        <h1>Release Notes v0.1.128</h1>
-        <p class="release-date">Released: 2024-12-15</p>
-        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
-            <a href="../index.html" class="github-link">
-                <i class="far fa-arrow-left"></i>
-                Back to Release Notes Index
-            </a>
-            <a href="https://github.com/qodo-ai/qodo-cli/releases/tag/v0.1.128" class="github-link" target="_blank">
-                <i class="fab fa-github"></i>
-                View on GitHub
-            </a>
-        </div>
+        <h1>Release Notes v8-release-note-agent</h1>
+        <p class="release-date">Released: 2025-06-17</p>
+        <a href="https://github.com/qodo-ai/qodo-gen-cli/releases/tag/v8-release-note-agent" class="github-link" target="_blank">
+            <i class="fab fa-github"></i>
+            View on GitHub
+        </a>
     </div>
     
     <div class="summary">
         <h2>Summary</h2>
-        <p>This release includes improvements to the release notes agent and website infrastructure.</p>
+        <p>This release focuses on improving the CI/CD workflow for release notes generation with enhanced debugging capabilities, better error handling, and more robust validation processes. The changes ensure more reliable execution of the Qodo CLI release notes generator and provide better visibility into the workflow execution process.</p>
         
         <h3 style="margin-top: 20px; margin-bottom: 15px; display: flex; align-items: center; gap: 8px;"><i class="far fa-heart"></i> Contributors</h3>
         <div class="contributors-grid">
             <div class="contributor">
-                <img src="https://github.com/adamwalker.png?size=40" alt="adamwalker" class="contributor-avatar">
+                <img src="https://github.com/AdamWalker-112358.png?size=40" alt="AdamWalker-112358" class="contributor-avatar">
                 <div class="contributor-info">
                     <div class="contributor-name">Adam Walker</div>
-                    <div class="contributor-username">@adamwalker</div>
+                    <div class="contributor-username">@AdamWalker-112358</div>
                 </div>
             </div>
         </div>
@@ -358,7 +352,7 @@
             <i class="far fa-chart-bar"></i>
             Overview
         </div>
-        <div class="tab" onclick="showTab('features')">
+        <div class="tab hidden" onclick="showTab('features')">
             <i class="far fa-lightbulb"></i>
             Features
         </div>
@@ -378,7 +372,7 @@
             <i class="far fa-clock"></i>
             Performance
         </div>
-        <div class="tab hidden" onclick="showTab('refactor')">
+        <div class="tab" onclick="showTab('refactor')">
             <i class="far fa-edit"></i>
             Refactoring
         </div>
@@ -386,16 +380,17 @@
             <i class="far fa-square"></i>
             Dependencies
         </div>
-        <div class="tab hidden" onclick="showTab('other')">
+        <div class="tab" onclick="showTab('other')">
             <i class="far fa-circle"></i>
             Other
         </div>
+
     </div>
     
     <div id="overview" class="tab-content active">
         <h2><i class="far fa-chart-bar"></i> Release Overview</h2>
         <div class="section">
-            <p>This release includes 3 changes across multiple categories. Navigate through the tabs above to explore specific types of changes.</p>
+            <p>This release includes 1 changes across multiple categories. Navigate through the tabs above to explore specific types of changes.</p>
             <table class="changes-table" style="margin-top: 20px;">
                 <thead>
                     <tr>
@@ -407,12 +402,12 @@
                 <tbody>
                     <tr>
                         <td><i class="far fa-lightbulb"></i> Features</td>
-                        <td>2</td>
+                        <td>0</td>
                         <td>New functionality and enhancements</td>
                     </tr>
                     <tr>
                         <td><i class="far fa-times-circle"></i> Bug Fixes</td>
-                        <td>1</td>
+                        <td>3</td>
                         <td>Resolved issues and error corrections</td>
                     </tr>
                     <tr>
@@ -432,7 +427,7 @@
                     </tr>
                     <tr>
                         <td><i class="far fa-edit"></i> Refactoring</td>
-                        <td>0</td>
+                        <td>2</td>
                         <td>Code structure and quality improvements</td>
                     </tr>
                     <tr>
@@ -442,40 +437,26 @@
                     </tr>
                     <tr>
                         <td><i class="far fa-circle"></i> Other</td>
-                        <td>0</td>
+                        <td>3</td>
                         <td>Miscellaneous changes and improvements</td>
                     </tr>
                 </tbody>
             </table>
             
-            <h3 style="margin-top: 40px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;"><i class="far fa-list-alt"></i> Pull Requests in this Release</h3>
+            <h3 style="margin-top: 40px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;"><i class="far fa-list-alt"></i> Changes in this Release</h3>
             <table class="changes-table">
                 <thead>
                     <tr>
-                        <th>PR</th>
-                        <th>Title</th>
+                        <th>Change</th>
                         <th>Type</th>
                         <th>Author</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><a href="#" class="pr-link" target="_blank">#001</a></td>
-                        <td>Add release notes website infrastructure</td>
-                        <td><span class="change-type">Feature</span></td>
-                        <td>@adamwalker</td>
-                    </tr>
-                    <tr>
-                        <td><a href="#" class="pr-link" target="_blank">#002</a></td>
-                        <td>Improve release notes agent to publish to dedicated branch</td>
-                        <td><span class="change-type">Feature</span></td>
-                        <td>@adamwalker</td>
-                    </tr>
-                    <tr>
-                        <td><a href="#" class="pr-link" target="_blank">#003</a></td>
-                        <td>Fix release notes generation workflow</td>
-                        <td><span class="change-type">Bug Fix</span></td>
-                        <td>@adamwalker</td>
+                        <td>Fix CI error - Enhanced workflow debugging and error handling</td>
+                        <td><span class="change-type">Enhancement</span></td>
+                        <td>@AdamWalker-112358</td>
                     </tr>
                 </tbody>
             </table>
@@ -484,28 +465,9 @@
     
     <div id="features" class="tab-content">
         <div class="section">
-            <h2><i class="far fa-lightbulb"></i> Features</h2>
-            <table class="changes-table">
-                <thead>
-                    <tr>
-                        <th>Change</th>
-                        <th>PR</th>
-                        <th>Author</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Added release notes website infrastructure</td>
-                        <td><a href="#" class="pr-link" target="_blank">#001</a></td>
-                        <td>@adamwalker</td>
-                    </tr>
-                    <tr>
-                        <td>Improved release notes agent to publish to dedicated branch</td>
-                        <td><a href="#" class="pr-link" target="_blank">#002</a></td>
-                        <td>@adamwalker</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="empty-section">
+                No new features were added in this release.
+            </div>
         </div>
     </div>
     
@@ -516,15 +478,25 @@
                 <thead>
                     <tr>
                         <th>Change</th>
-                        <th>PR</th>
+                        <th>Description</th>
                         <th>Author</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Fixed release notes generation workflow</td>
-                        <td><a href="#" class="pr-link" target="_blank">#003</a></td>
-                        <td>@adamwalker</td>
+                        <td>Enhanced CI Error Handling</td>
+                        <td>Fixed CI workflow execution by adding continue-on-error flag to prevent workflow failures from stopping the release notes generation process</td>
+                        <td>@AdamWalker-112358</td>
+                    </tr>
+                    <tr>
+                        <td>Improved Workflow Validation</td>
+                        <td>Added comprehensive validation steps to check git state, tags, and repository status before executing release notes generation</td>
+                        <td>@AdamWalker-112358</td>
+                    </tr>
+                    <tr>
+                        <td>Better Directory Verification</td>
+                        <td>Enhanced verification logic to properly check for the creation of the release-notes directory and provide detailed error messages when issues occur</td>
+                        <td>@AdamWalker-112358</td>
                     </tr>
                 </tbody>
             </table>
@@ -532,44 +504,100 @@
     </div>
     
     <div id="breaking" class="tab-content">
-        <div class="empty-section">
-            <p>No breaking changes in this release.</p>
+        <div class="section">
+            <div class="empty-section">
+                No breaking changes were introduced in this release.
+            </div>
         </div>
     </div>
     
     <div id="docs" class="tab-content">
-        <div class="empty-section">
-            <p>No documentation changes in this release.</p>
+        <div class="section">
+            <div class="empty-section">
+                No documentation changes were made in this release.
+            </div>
         </div>
     </div>
     
     <div id="performance" class="tab-content">
-        <div class="empty-section">
-            <p>No performance improvements in this release.</p>
+        <div class="section">
+            <div class="empty-section">
+                No performance improvements were made in this release.
+            </div>
         </div>
     </div>
     
     <div id="refactor" class="tab-content">
-        <div class="empty-section">
-            <p>No refactoring changes in this release.</p>
+        <div class="section">
+            <h2><i class="far fa-edit"></i> Refactoring</h2>
+            <table class="changes-table">
+                <thead>
+                    <tr>
+                        <th>Change</th>
+                        <th>Description</th>
+                        <th>Author</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Workflow Debugging Enhancement</td>
+                        <td>Refactored the GitHub Actions workflow to include extensive debugging information including git tags, status, current branch, and recent commits</td>
+                        <td>@AdamWalker-112358</td>
+                    </tr>
+                    <tr>
+                        <td>Error Message Improvements</td>
+                        <td>Improved error messaging and validation logic in the release notes verification process</td>
+                        <td>@AdamWalker-112358</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     
     <div id="deps" class="tab-content">
-        <div class="empty-section">
-            <p>No dependency updates in this release.</p>
+        <div class="section">
+            <div class="empty-section">
+                No dependency changes were made in this release.
+            </div>
         </div>
     </div>
     
     <div id="other" class="tab-content">
-        <div class="empty-section">
-            <p>No other changes in this release.</p>
+        <div class="section">
+            <h2><i class="far fa-circle"></i> Other Changes</h2>
+            <table class="changes-table">
+                <thead>
+                    <tr>
+                        <th>Change</th>
+                        <th>Description</th>
+                        <th>Author</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Added Comprehensive Logging</td>
+                        <td>Introduced detailed logging for git state validation including available tags, git status, current branch, and recent commits</td>
+                        <td>@AdamWalker-112358</td>
+                    </tr>
+                    <tr>
+                        <td>Enhanced Debug Output</td>
+                        <td>Added debug steps to list directory contents and verify the presence of generated release notes files</td>
+                        <td>@AdamWalker-112358</td>
+                    </tr>
+                    <tr>
+                        <td>Workflow Robustness</td>
+                        <td>Improved overall workflow reliability by adding proper error handling and validation at each step</td>
+                        <td>@AdamWalker-112358</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
     
+    
     <div class="footer">
         <p><em>This release notes file was generated automatically by the Qodo CLI release notes agent.</em></p>
-        <p style="margin-top: 10px; font-size: 0.8rem; color: #999;">Generated on December 15, 2024 at 3:45 PM UTC</p>
+        <p style="margin-top: 10px; font-size: 0.8rem; color: #999;">Generated on June 17, 2025 at 6:57 PM UTC</p>
     </div>
     
     <script>

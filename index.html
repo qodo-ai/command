@@ -36,39 +36,62 @@
             margin-bottom: 10px;
         }
         
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
         .version-badge {
             display: inline-block;
             padding: 8px 16px;
             background-color: #f8f8f8;
             border: 1px solid #ddd;
             border-radius: 20px;
-            font-size: 0.9rem;
-            font-weight: 500;
+            font-weight: 600;
+            color: #333;
             margin-bottom: 20px;
         }
         
-        .description {
-            font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 30px;
-        }
-        
-        .release-notes-list {
-            display: grid;
-            gap: 20px;
-            margin-top: 30px;
-        }
-        
-        .release-note-item {
+        .github-link {
+            display: inline-block;
+            padding: 12px 20px;
             background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        
+        .github-link:hover {
+            background-color: #e8e8e8;
+        }
+        
+        .github-link i {
+            margin-right: 8px;
+        }
+        
+        .release-notes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .release-note-card {
+            background-color: #fff;
             border: 1px solid #ddd;
             border-radius: 8px;
             padding: 25px;
-            transition: box-shadow 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: box-shadow 0.2s, transform 0.2s;
         }
         
-        .release-note-item:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        .release-note-card:hover {
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
         }
         
         .release-note-title {
@@ -76,11 +99,9 @@
             font-weight: 600;
             color: #333;
             margin-bottom: 8px;
-            text-decoration: none;
-        }
-        
-        .release-note-title:hover {
-            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .release-note-date {
@@ -91,7 +112,39 @@
         
         .release-note-summary {
             color: #555;
+            margin-bottom: 15px;
             line-height: 1.5;
+        }
+        
+        .release-note-link {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        
+        .release-note-link:hover {
+            background-color: #e8e8e8;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        .error {
+            text-align: center;
+            padding: 40px;
+            color: #d32f2f;
+            background-color: #ffebee;
+            border-radius: 4px;
+            margin: 20px 0;
         }
         
         .footer {
@@ -113,7 +166,17 @@
                 margin-bottom: 30px;
             }
             
-            .release-note-item {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .release-notes-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin-top: 30px;
+            }
+            
+            .release-note-card {
                 padding: 20px;
             }
         }
@@ -121,21 +184,32 @@
 </head>
 <body>
     <div class="header">
-        <h1>Qodo CLI Release Notes</h1>
-        <div class="version-badge">Latest: v0.1.128</div>
-        <p class="description">Stay up to date with the latest features, improvements, and bug fixes in Qodo CLI.</p>
+        <h1><i class="fas fa-file-alt"></i> Qodo CLI Release Notes</h1>
+        <p class="subtitle">Complete changelog and release history</p>
+        <div class="version-badge">Latest: v8-release-note-agent</div>
+        <br>
+        <a href="https://github.com/qodo-ai/qodo-cli" class="github-link" target="_blank">
+            <i class="fab fa-github"></i>
+            View on GitHub
+        </a>
     </div>
     
-    <div class="release-notes-list" id="releaseNotesList">
-        <!-- Release notes will be loaded here -->
+    <div id="loading" class="loading">
+        <i class="fas fa-spinner fa-spin"></i> Loading release notes...
+    </div>
+    
+    <div id="error" class="error" style="display: none;">
+        <i class="fas fa-exclamation-triangle"></i> Failed to load release notes. Please try again later.
+    </div>
+    
+    <div id="release-notes-container" class="release-notes-grid" style="display: none;">
+        <!-- Release notes will be populated here -->
     </div>
     
     <div class="footer">
         <p><em>Release notes are generated automatically by the Qodo CLI release notes agent.</em></p>
         <p style="margin-top: 10px; font-size: 0.8rem; color: #999;">
-            <a href="https://github.com/qodo-ai/qodo-gen-cli" target="_blank" style="color: #666; text-decoration: none;">
-                <i class="fab fa-github"></i> View on GitHub
-            </a>
+            Last updated: <span id="last-updated">June 17, 2025</span>
         </p>
     </div>
     
@@ -143,10 +217,16 @@
         async function fetchReleaseNotes() {
             return [
                 {
-                    title: "Release Notes v0.1.128",
+                    title: "Release Notes v8-release-note-agent",
                     date: "2025-06-17",
-                    summary: "This release introduces automated release notes generation capabilities and includes several important bug fixes and improvements. The major addition is a comprehensive release notes agent that can automatically generate professional release notes from GitHub pull requests.",
-                    link: "release-notes/release-notes-v0.1.128.html"
+                    summary: "This release focuses on improving the CI/CD workflow for release notes generation with enhanced debugging capabilities, better error handling, and more robust validation processes.",
+                    link: "release-notes/release-notes-v8-release-note-agent.html"
+                },
+                {
+                    title: "Release Notes v0.1.129",
+                    date: "2025-06-16",
+                    summary: "This release introduces a comprehensive automated release notes generation system and includes various documentation improvements and configuration updates.",
+                    link: "release-notes/release-notes-v0.1.129.html"
                 }
             ];
         }
@@ -154,24 +234,42 @@
         async function loadReleaseNotes() {
             try {
                 const releaseNotes = await fetchReleaseNotes();
-                const container = document.getElementById('releaseNotesList');
+                const container = document.getElementById('release-notes-container');
+                const loading = document.getElementById('loading');
+                const error = document.getElementById('error');
                 
-                if (releaseNotes.length === 0) {
-                    container.innerHTML = '<p style="text-align: center; color: #666; font-style: italic;">No release notes available yet.</p>';
-                    return;
+                if (releaseNotes && releaseNotes.length > 0) {
+                    container.innerHTML = releaseNotes.map(note => `
+                        <div class="release-note-card">
+                            <h3 class="release-note-title">
+                                <i class="far fa-file-alt"></i>
+                                ${note.title}
+                            </h3>
+                            <div class="release-note-date">
+                                <i class="far fa-calendar"></i>
+                                ${new Date(note.date).toLocaleDateString('en-US', { 
+                                    year: 'numeric', 
+                                    month: 'long', 
+                                    day: 'numeric' 
+                                })}
+                            </div>
+                            <p class="release-note-summary">${note.summary}</p>
+                            <a href="${note.link}" class="release-note-link">
+                                <i class="fas fa-external-link-alt"></i>
+                                View Release Notes
+                            </a>
+                        </div>
+                    `).join('');
+                    
+                    loading.style.display = 'none';
+                    container.style.display = 'grid';
+                } else {
+                    throw new Error('No release notes found');
                 }
-                
-                container.innerHTML = releaseNotes.map(note => `
-                    <div class="release-note-item">
-                        <a href="${note.link}" class="release-note-title">${note.title}</a>
-                        <div class="release-note-date">${note.date}</div>
-                        <div class="release-note-summary">${note.summary}</div>
-                    </div>
-                `).join('');
-            } catch (error) {
-                console.error('Error loading release notes:', error);
-                document.getElementById('releaseNotesList').innerHTML = 
-                    '<p style="text-align: center; color: #666; font-style: italic;">Error loading release notes.</p>';
+            } catch (err) {
+                console.error('Error loading release notes:', err);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
             }
         }
         
