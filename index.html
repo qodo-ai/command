@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Qodo Gen CLI - Release Notes</title>
+    <title>Qodo CLI - Release Notes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -28,7 +28,7 @@
             padding-bottom: 30px;
             margin-bottom: 50px;
         }
-
+        
         h1 {
             font-size: 2.5rem;
             font-weight: 700;
@@ -36,85 +36,39 @@
             margin-bottom: 10px;
         }
         
-        .project-description {
-            font-size: 1.1rem;
-            color: #666;
-            font-style: italic;
-            margin-bottom: 15px;
-        }
-        
         .version-badge {
             display: inline-block;
             padding: 8px 16px;
             background-color: #f8f8f8;
             border: 1px solid #ddd;
-            border-radius: 4px;
-            font-weight: 600;
-            color: #333;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
             margin-bottom: 20px;
         }
         
-        .links {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
+        .description {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 30px;
         }
         
-        .link {
-            display: inline-block;
-            padding: 12px 20px;
-            background-color: #f8f8f8;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            color: #333;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background-color 0.2s;
-        }
-        
-        .link:hover {
-            background-color: #e8e8e8;
-        }
-        
-        .link i {
-            margin-right: 8px;
-        }
-
-        .summary {
-            background-color: #f8f8f8;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .summary h2 {
-            margin-bottom: 15px;
-            color: #333;
-            font-size: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .release-notes-grid {
+        .release-notes-list {
             display: grid;
-            gap: 1.5rem;
-            margin-top: 2rem;
+            gap: 20px;
+            margin-top: 30px;
         }
         
-        .release-note-card {
-            background: white;
+        .release-note-item {
+            background-color: #f8f8f8;
             border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 20px;
-            transition: background-color 0.2s;
-            border-left: 4px solid #333;
+            border-radius: 8px;
+            padding: 25px;
+            transition: box-shadow 0.2s;
         }
         
-        .release-note-card:hover {
-            background-color: #f0f0f0;
+        .release-note-item:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
         
         .release-note-title {
@@ -122,62 +76,24 @@
             font-weight: 600;
             color: #333;
             margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            text-decoration: none;
+        }
+        
+        .release-note-title:hover {
+            color: #555;
         }
         
         .release-note-date {
-            color: #666;
             font-size: 0.9rem;
+            color: #666;
             margin-bottom: 12px;
         }
         
         .release-note-summary {
             color: #555;
-            margin-bottom: 15px;
+            line-height: 1.5;
         }
         
-        .read-more-btn {
-            display: inline-block;
-            color: #333;
-            text-decoration: underline;
-            font-weight: 500;
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background-color: #f8f8f8;
-            transition: background-color 0.2s;
-        }
-        
-        .read-more-btn:hover {
-            background-color: #e8e8e8;
-            text-decoration: none;
-        }
-
-        .empty-state {
-            color: #666;
-            font-style: italic;
-            padding: 60px 30px;
-            text-align: center;
-            background-color: #f8f8f8;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        
-        .empty-state-icon {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            color: #999;
-        }
-        
-        .empty-state h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: #333;
-            font-weight: 600;
-        }
-
         .footer {
             margin-top: 60px;
             padding-top: 30px;
@@ -186,31 +102,7 @@
             color: #666;
             font-size: 0.9rem;
         }
-
-        .loading {
-            text-align: center;
-            padding: 60px 30px;
-            color: #666;
-            background-color: #f8f8f8;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
         
-        .spinner {
-            border: 3px solid #f3f3f3;
-            border-top: 3px solid #333;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 1rem;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
         @media (max-width: 768px) {
             body {
                 padding: 40px 20px;
@@ -221,380 +113,70 @@
                 margin-bottom: 30px;
             }
             
-            h1 {
-                font-size: 2rem;
-            }
-            
-            .summary {
+            .release-note-item {
                 padding: 20px;
-                margin-bottom: 30px;
-            }
-            
-            .links {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .link {
-                width: 200px;
-                text-align: center;
             }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>Qodo Gen CLI - Release Notes</h1>
-        <p class="project-description">AI-powered command line interface for developers</p>
-        <div class="version-badge" id="version-badge">
-            Current Version: v0.1.128
-        </div>
-        <div class="links">
-            <a href="https://docs.qodo.ai/qodo-documentation/qodo-gen/cli" class="link" target="_blank">
-                <i class="far fa-file-alt"></i>
-                Documentation
-            </a>
-            <a href="https://github.com/qodo-ai/qodo-gen-cli" class="link" target="_blank">
-                <i class="fab fa-github"></i>
-                GitHub
-            </a>
-            <a href="https://www.npmjs.com/package/@qodo/gen" class="link" target="_blank">
-                <i class="fab fa-npm"></i>
-                NPM
-            </a>
-        </div>
+        <h1>Qodo CLI Release Notes</h1>
+        <div class="version-badge">Latest: v0.1.128</div>
+        <p class="description">Stay up to date with the latest features, improvements, and bug fixes in Qodo CLI.</p>
     </div>
     
-    <div class="summary">
-        <h2><i class="far fa-list-alt"></i> Release Notes Index</h2>
-        <p>This page provides access to all release notes for Qodo Gen CLI. Each release includes detailed information about new features, bug fixes, breaking changes, and other improvements.</p>
-    </div>
-    
-    <div id="loading" class="loading">
-        <div class="spinner"></div>
-        <p>Loading release notes...</p>
-    </div>
-
-    <div id="release-notes-container" class="release-notes-grid" style="display: none;">
-        <!-- Release notes will be dynamically loaded here -->
-    </div>
-
-    <div id="empty-state" class="empty-state" style="display: none;">
-        <div class="empty-state-icon"><i class="far fa-file-alt"></i></div>
-        <h3>No Release Notes Yet</h3>
-        <p>Release notes will appear here once they are generated by the release notes agent.</p>
-        <p>Check back soon for updates!</p>
+    <div class="release-notes-list" id="releaseNotesList">
+        <!-- Release notes will be loaded here -->
     </div>
     
     <div class="footer">
-        <p><em>This release notes index was generated automatically by the Qodo CLI release notes agent.</em></p>
-        <p style="margin-top: 10px; font-size: 0.8rem; color: #999;">&copy; 2024 Qodo. All rights reserved.</p>
+        <p><em>Release notes are generated automatically by the Qodo CLI release notes agent.</em></p>
+        <p style="margin-top: 10px; font-size: 0.8rem; color: #999;">
+            <a href="https://github.com/qodo-ai/qodo-gen-cli" target="_blank" style="color: #666; text-decoration: none;">
+                <i class="fab fa-github"></i> View on GitHub
+            </a>
+        </p>
     </div>
-
+    
     <script>
-        // Function to load and display release notes
+        async function fetchReleaseNotes() {
+            return [
+                {
+                    title: "Release Notes v0.1.128",
+                    date: "2025-06-17",
+                    summary: "This release introduces automated release notes generation capabilities and includes several important bug fixes and improvements. The major addition is a comprehensive release notes agent that can automatically generate professional release notes from GitHub pull requests.",
+                    link: "release-notes/release-notes-v0.1.128.html"
+                }
+            ];
+        }
+        
         async function loadReleaseNotes() {
             try {
-                // Simulate loading time
-                await new Promise(resolve => setTimeout(resolve, 1000));
-                
-                // In a real implementation, this would fetch from the release-notes folder
-                // For now, we'll check if there are any release notes and show empty state
                 const releaseNotes = await fetchReleaseNotes();
-                
-                const loadingElement = document.getElementById('loading');
-                const containerElement = document.getElementById('release-notes-container');
-                const emptyStateElement = document.getElementById('empty-state');
-                
-                loadingElement.style.display = 'none';
+                const container = document.getElementById('releaseNotesList');
                 
                 if (releaseNotes.length === 0) {
-                    emptyStateElement.style.display = 'block';
-                } else {
-                    containerElement.style.display = 'grid';
-                    renderReleaseNotes(releaseNotes);
+                    container.innerHTML = '<p style="text-align: center; color: #666; font-style: italic;">No release notes available yet.</p>';
+                    return;
                 }
+                
+                container.innerHTML = releaseNotes.map(note => `
+                    <div class="release-note-item">
+                        <a href="${note.link}" class="release-note-title">${note.title}</a>
+                        <div class="release-note-date">${note.date}</div>
+                        <div class="release-note-summary">${note.summary}</div>
+                    </div>
+                `).join('');
             } catch (error) {
                 console.error('Error loading release notes:', error);
-                document.getElementById('loading').innerHTML = '<p>Error loading release notes. Please try again later.</p>';
-            }
-        }
-
-        // Function to fetch release notes dynamically
-        async function fetchReleaseNotes() {
-            try {
-                // Get list of HTML files in the release-notes directory
-                const releaseNotesFiles = await getReleaseNotesFiles();
-                const releaseNotes = [];
-                
-                // Process each HTML file to extract metadata
-                for (const file of releaseNotesFiles) {
-                    try {
-                        const metadata = await extractMetadataFromFile(file);
-                        if (metadata) {
-                            releaseNotes.push(metadata);
-                        }
-                    } catch (error) {
-                        console.warn(`Failed to process ${file}:`, error);
-                    }
-                }
-                
-                // Sort by date (newest first)
-                releaseNotes.sort((a, b) => new Date(b.date) - new Date(a.date));
-                
-                return releaseNotes;
-            } catch (error) {
-                console.error('Error fetching release notes:', error);
-                return [];
+                document.getElementById('releaseNotesList').innerHTML = 
+                    '<p style="text-align: center; color: #666; font-style: italic;">Error loading release notes.</p>';
             }
         }
         
-        // Function to get list of HTML files in release-notes directory
-        async function getReleaseNotesFiles() {
-            // First, try to use a manifest file if it exists
-            try {
-                const manifestResponse = await fetch('release-notes/manifest.json');
-                if (manifestResponse.ok) {
-                    const manifest = await manifestResponse.json();
-                    console.log('✅ Found manifest file with', manifest.count || 0, 'release notes');
-                    return manifest.files || [];
-                }
-            } catch (error) {
-                console.log('No manifest file found, trying other methods');
-            }
-            
-            // Try to fetch the directory listing from GitHub API if available
-            try {
-                const response = await fetch('https://api.github.com/repos/qodo-ai/qodo-cli/contents/release-notes');
-                if (response.ok) {
-                    const files = await response.json();
-                    return files
-                        .filter(file => file.name.endsWith('.html'))
-                        .map(file => file.name);
-                }
-            } catch (error) {
-                console.log('GitHub API not available, using fallback method');
-            }
-            
-            // Fallback: try to discover files by attempting to fetch known patterns
-            const knownFiles = [];
-            
-            // Start with known existing files
-            const knownPatterns = [
-                'release-notes-v0.1.128.html'
-            ];
-            
-            for (const pattern of knownPatterns) {
-                try {
-                    const response = await fetch(`release-notes/${pattern}`, { method: 'HEAD' });
-                    if (response.ok) {
-                        knownFiles.push(pattern);
-                    }
-                } catch (error) {
-                    // File doesn't exist, continue
-                }
-            }
-            
-            // Try to find additional files by checking common version patterns
-            // This is more targeted to avoid too many requests
-            const additionalPatterns = await generateLikelyVersionPatterns();
-            for (const pattern of additionalPatterns) {
-                try {
-                    const response = await fetch(`release-notes/${pattern}`, { method: 'HEAD' });
-                    if (response.ok && !knownFiles.includes(pattern)) {
-                        knownFiles.push(pattern);
-                    }
-                } catch (error) {
-                    // File doesn't exist, continue
-                }
-            }
-            
-            return knownFiles;
-        }
-        
-        // Function to generate likely version patterns (more targeted)
-        async function generateLikelyVersionPatterns() {
-            const patterns = [];
-            const currentDate = new Date();
-            const currentYear = currentDate.getFullYear();
-            
-            // Generate patterns for recent versions (more likely to exist)
-            // Focus on v0.1.x range around the known version
-            for (let patch = 120; patch <= 140; patch++) {
-                patterns.push(`release-notes-v0.1.${patch}.html`);
-            }
-            
-            // Also try some v0.2.x versions
-            for (let patch = 1; patch <= 20; patch++) {
-                patterns.push(`release-notes-v0.2.${patch}.html`);
-            }
-            
-            // Try v1.0.x versions
-            for (let patch = 0; patch <= 10; patch++) {
-                patterns.push(`release-notes-v1.0.${patch}.html`);
-            }
-            
-            return patterns;
-        }
-        
-        // Function to extract metadata from HTML file
-        async function extractMetadataFromFile(filename) {
-            try {
-                const response = await fetch(`release-notes/${filename}`);
-                if (!response.ok) {
-                    throw new Error(`Failed to fetch ${filename}`);
-                }
-                
-                const html = await response.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                
-                // Extract title
-                const titleElement = doc.querySelector('h1');
-                const title = titleElement ? titleElement.textContent.trim() : filename.replace('.html', '');
-                
-                // Extract date
-                const dateElement = doc.querySelector('.release-date');
-                let date = 'Unknown';
-                if (dateElement) {
-                    const dateText = dateElement.textContent;
-                    const dateMatch = dateText.match(/Released:\s*([\d-]+)/);
-                    if (dateMatch) {
-                        date = dateMatch[1];
-                    }
-                }
-                
-                // Extract summary
-                const summaryElement = doc.querySelector('.summary p');
-                const summary = summaryElement ? summaryElement.textContent.trim() : 'Release notes for ' + title;
-                
-                // Extract version from filename or title
-                const versionMatch = filename.match(/v([\d.]+)/) || title.match(/v([\d.]+)/);
-                const version = versionMatch ? versionMatch[1] : 'Unknown';
-                
-                return {
-                    title,
-                    date,
-                    summary,
-                    version,
-                    link: `release-notes/${filename}`,
-                    filename
-                };
-            } catch (error) {
-                console.error(`Error extracting metadata from ${filename}:`, error);
-                return null;
-            }
-        }
-
-        // Function to render release notes
-        function renderReleaseNotes(releaseNotes) {
-            const container = document.getElementById('release-notes-container');
-            container.innerHTML = ''; // Clear existing content
-            
-            releaseNotes.forEach(note => {
-                const card = document.createElement('div');
-                card.className = 'release-note-card';
-                
-                // Format the date nicely
-                const formattedDate = formatDate(note.date);
-                
-                card.innerHTML = `
-                    <h3 class="release-note-title">
-                        <i class="far fa-file-alt"></i>
-                        ${escapeHtml(note.title)}
-                    </h3>
-                    <div class="release-note-date">
-                        <i class="far fa-calendar"></i>
-                        ${formattedDate}
-                        ${note.version !== 'Unknown' ? `<span style="margin-left: 15px;"><i class="far fa-tag"></i> v${note.version}</span>` : ''}
-                    </div>
-                    <div class="release-note-summary">${escapeHtml(note.summary)}</div>
-                    <a href="${note.link}" class="read-more-btn">
-                        <i class="far fa-arrow-right"></i>
-                        Read Full Release Notes
-                    </a>
-                `;
-                
-                container.appendChild(card);
-            });
-        }
-        
-        // Helper function to format dates
-        function formatDate(dateString) {
-            if (dateString === 'Unknown') return 'Unknown';
-            
-            try {
-                const date = new Date(dateString);
-                return date.toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                });
-            } catch (error) {
-                return dateString;
-            }
-        }
-        
-        // Helper function to escape HTML
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        // Function to update the current version badge
-        async function updateVersion() {
-            try {
-                // First try to get version from manifest
-                try {
-                    const manifestResponse = await fetch('release-notes/manifest.json');
-                    if (manifestResponse.ok) {
-                        const manifest = await manifestResponse.json();
-                        if (manifest.latestVersion) {
-                            const versionBadge = document.getElementById('version-badge');
-                            versionBadge.textContent = `Current Version: v${manifest.latestVersion}`;
-                            return;
-                        }
-                    }
-                } catch (error) {
-                    console.log('Could not get version from manifest');
-                }
-                
-                // Fallback: try to get the latest version from the release notes
-                const releaseNotes = await fetchReleaseNotes();
-                if (releaseNotes.length > 0) {
-                    const latestVersion = releaseNotes[0].version;
-                    if (latestVersion !== 'Unknown') {
-                        const versionBadge = document.getElementById('version-badge');
-                        versionBadge.textContent = `Current Version: v${latestVersion}`;
-                    }
-                }
-            } catch (error) {
-                console.log('Could not fetch version dynamically');
-            }
-        }
-
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', () => {
-            loadReleaseNotes();
-            updateVersion();
-        });
-
-        // Add some interactivity for better UX
-        document.addEventListener('DOMContentLoaded', () => {
-            // Add smooth scrolling for any internal links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
-                    if (target) {
-                        target.scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-        });
+        // Load release notes when page loads
+        document.addEventListener('DOMContentLoaded', loadReleaseNotes);
     </script>
 </body>
 </html>
