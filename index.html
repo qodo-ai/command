@@ -73,63 +73,11 @@
             margin-right: 8px;
         }
         
-        .latest-release {
-            margin-top: 40px;
-            margin-bottom: 50px;
-        }
-        
-        .latest-release h2 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .latest-release-card {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 30px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-            transition: box-shadow 0.2s, transform 0.2s;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .latest-release-card:hover {
-            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
-            transform: translateY(-2px);
-        }
-        
-        .latest-release-card .release-note-title {
-            color: #333;
-            font-size: 1.5rem;
-        }
-        
-        .latest-release-card .release-note-date {
-            color: #666;
-        }
-        
-        .latest-release-card .release-note-summary {
-            color: #555;
-        }
-        
-        .latest-release-card .release-note-link {
-            background-color: #f8f8f8;
-            border: 1px solid #ddd;
-            color: #333;
-        }
-        
-        .latest-release-card .release-note-link:hover {
-            background-color: #e8e8e8;
-        }
-        
-        .previous-releases {
+        .all-releases {
             margin-top: 50px;
         }
         
-        .previous-releases h2 {
+        .all-releases h2 {
             font-size: 1.8rem;
             font-weight: 600;
             color: #333;
@@ -152,6 +100,9 @@
             padding: 25px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             transition: box-shadow 0.2s, transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         
         .release-note-card:hover {
@@ -160,13 +111,26 @@
         }
         
         .release-note-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            color: #333;
             margin-bottom: 8px;
+        }
+        
+        .release-note-title-main {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #666;
+            margin-bottom: 4px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
+        }
+        
+        .release-note-version {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #333;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
         .release-note-date {
@@ -179,6 +143,7 @@
             color: #555;
             margin-bottom: 15px;
             line-height: 1.5;
+            flex-grow: 1;
         }
         
         .release-note-link {
@@ -235,16 +200,7 @@
                 font-size: 2rem;
             }
             
-            .latest-release {
-                margin-top: 30px;
-                margin-bottom: 40px;
-            }
-            
-            .latest-release-card {
-                padding: 25px;
-            }
-            
-            .previous-releases {
+            .all-releases {
                 margin-top: 40px;
             }
             
@@ -279,17 +235,10 @@
         <i class="fas fa-exclamation-triangle"></i> Failed to load release notes. Please try again later.
     </div>
     
-    <div id="latest-release-container" class="latest-release" style="display: none;">
-        <h2><i class="fas fa-star"></i> Latest Release</h2>
-        <div id="latest-release-card">
-            <!-- Latest release will be populated here -->
-        </div>
-    </div>
-    
-    <div id="previous-releases-container" class="previous-releases" style="display: none;">
-        <h2><i class="fas fa-history"></i> Previous Releases</h2>
+    <div id="all-releases-container" class="all-releases" style="display: none;">
+        <h2><i class="fas fa-file-alt"></i> All Releases</h2>
         <div id="release-notes-grid" class="release-notes-grid">
-            <!-- Previous releases will be populated here -->
+            <!-- All releases will be populated here -->
         </div>
     </div>
     
@@ -327,68 +276,40 @@
         async function loadReleaseNotes() {
             try {
                 const releaseNotes = await fetchReleaseNotes();
-                const latestContainer = document.getElementById('latest-release-container');
-                const previousContainer = document.getElementById('previous-releases-container');
-                const latestCard = document.getElementById('latest-release-card');
-                const previousGrid = document.getElementById('release-notes-grid');
+                const allReleasesContainer = document.getElementById('all-releases-container');
+                const releaseNotesGrid = document.getElementById('release-notes-grid');
                 const loading = document.getElementById('loading');
                 const error = document.getElementById('error');
                 
                 if (releaseNotes && releaseNotes.length > 0) {
-                    // Separate latest and previous releases
-                    const [latestRelease, ...previousReleases] = releaseNotes;
-                    
-                    // Populate latest release
-                    latestCard.innerHTML = `
-                        <div class="release-note-card latest-release-card">
-                            <h3 class="release-note-title">
-                                <i class="fas fa-star"></i>
-                                ${latestRelease.title}
-                            </h3>
+                    // Populate all releases in a single grid
+                    releaseNotesGrid.innerHTML = releaseNotes.map((note, index) => `
+                        <div class="release-note-card">
+                            <div class="release-note-title">
+                                <div class="release-note-title-main">
+                                    <i class="far fa-file-alt"></i>
+                                    Release Notes
+                                </div>
+                                <div class="release-note-version">${note.title.replace('Release Notes ', '')}</div>
+                            </div>
                             <div class="release-note-date">
                                 <i class="far fa-calendar"></i>
-                                ${new Date(latestRelease.date).toLocaleDateString('en-US', { 
+                                ${new Date(note.date).toLocaleDateString('en-US', { 
                                     year: 'numeric', 
                                     month: 'long', 
                                     day: 'numeric' 
                                 })}
                             </div>
-                            <p class="release-note-summary">${latestRelease.summary}</p>
-                            <a href="${latestRelease.link}" class="release-note-link">
+                            <p class="release-note-summary">${note.summary}</p>
+                            <a href="${note.link}" class="release-note-link">
                                 <i class="fas fa-external-link-alt"></i>
                                 View Release Notes
                             </a>
                         </div>
-                    `;
-                    
-                    // Populate previous releases if any
-                    if (previousReleases.length > 0) {
-                        previousGrid.innerHTML = previousReleases.map(note => `
-                            <div class="release-note-card">
-                                <h3 class="release-note-title">
-                                    <i class="far fa-file-alt"></i>
-                                    ${note.title}
-                                </h3>
-                                <div class="release-note-date">
-                                    <i class="far fa-calendar"></i>
-                                    ${new Date(note.date).toLocaleDateString('en-US', { 
-                                        year: 'numeric', 
-                                        month: 'long', 
-                                        day: 'numeric' 
-                                    })}
-                                </div>
-                                <p class="release-note-summary">${note.summary}</p>
-                                <a href="${note.link}" class="release-note-link">
-                                    <i class="fas fa-external-link-alt"></i>
-                                    View Release Notes
-                                </a>
-                            </div>
-                        `).join('');
-                        previousContainer.style.display = 'block';
-                    }
+                    `).join('');
                     
                     loading.style.display = 'none';
-                    latestContainer.style.display = 'block';
+                    allReleasesContainer.style.display = 'block';
                 } else {
                     throw new Error('No release notes found');
                 }
