@@ -85,7 +85,6 @@
             padding: 25px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             transition: box-shadow 0.2s, transform 0.2s;
-            text-decoration: none;
             color: inherit;
             display: block;
         }
@@ -93,7 +92,6 @@
         .release-card:hover {
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             transform: translateY(-2px);
-            text-decoration: none;
         }
         
         .release-version {
@@ -123,6 +121,7 @@
             gap: 15px;
             font-size: 0.85rem;
             color: #666;
+            margin-bottom: 20px;
         }
         
         .stat {
@@ -139,6 +138,29 @@
             font-size: 0.7rem;
             font-weight: 600;
             text-transform: uppercase;
+        }
+        
+        .release-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #000;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background-color 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .release-button:hover {
+            background-color: #333;
+            text-decoration: none;
+            color: #fff;
+        }
+        
+        .release-button i {
+            margin-right: 8px;
         }
         
         .footer {
@@ -202,119 +224,139 @@
     </div>
     
     <div class="releases-grid">
-        <a href="release-notes-v20-release-note-agent.html" class="release-card">
+        <div class="release-card">
             <div class="release-version">
-                v20-release-note-agent
+                v21-release-note-agent
                 <span class="latest-badge">Latest</span>
             </div>
-            <div class="release-date">Released: 2025-06-19</div>
-            <div class="release-summary">Enhanced CI/CD workflow for release notes generation with improved debugging, file handling, and error management. Updated agent configuration for streamlined index.html generation.</div>
+            <div class="release-date">June 19, 2025</div>
+            <div class="release-summary">Enhanced release notes system with comprehensive HTML template for index page, providing better visual presentation and navigation.</div>
             <div class="release-stats">
                 <div class="stat">
-                    <i class="far fa-list-alt"></i>
-                    <span>2 changes</span>
+                    <i class="far fa-lightbulb"></i>
+                    <span>2 Features</span>
                 </div>
                 <div class="stat">
-                    <i class="far fa-user"></i>
-                    <span>1 contributor</span>
+                    <i class="fas fa-wrench"></i>
+                    <span>2 Improvements</span>
                 </div>
             </div>
-        </a>
+            <a href="release-notes/release-notes-v21-release-note-agent.html" class="release-button" target="_blank">
+                <i class="far fa-file-alt"></i>
+                View Release Notes
+            </a>
+        </div>
         
-        <a href="release-notes-v0.1.129.html" class="release-card">
+        <div class="release-card">
             <div class="release-version">
-                v0.1.129
+                v20-release-note-agent
             </div>
-            <div class="release-date">Released: 2024-12-16</div>
-            <div class="release-summary">Version bump and test execution improvements in CI pipeline with enhanced model selection and best practices support.</div>
+            <div class="release-date">June 19, 2025</div>
+            <div class="release-summary">CI improvements and fixes for the release notes generation workflow.</div>
             <div class="release-stats">
                 <div class="stat">
-                    <i class="far fa-list-alt"></i>
-                    <span>Multiple changes</span>
-                </div>
-                <div class="stat">
-                    <i class="far fa-user"></i>
-                    <span>Multiple contributors</span>
+                    <i class="fas fa-wrench"></i>
+                    <span>1 CI Fix</span>
                 </div>
             </div>
-        </a>
+            <a href="release-notes/release-notes-v20-release-note-agent.html" class="release-button" target="_blank">
+                <i class="far fa-file-alt"></i>
+                View Release Notes
+            </a>
+        </div>
         
-        <a href="release-notes-v0.1.128.html" class="release-card">
-            <div class="release-version">
-                v0.1.128
-            </div>
-            <div class="release-date">Released: 2024-12-15</div>
-            <div class="release-summary">Enhanced model selection with support for GPT-4.0, GPT-o1-preview, GPT-o1-mini, Claude 3.5 Sonnet, and Gemini 1.5 Pro. Added best practices support and chat improvements.</div>
-            <div class="release-stats">
-                <div class="stat">
-                    <i class="far fa-list-alt"></i>
-                    <span>Multiple changes</span>
-                </div>
-                <div class="stat">
-                    <i class="far fa-user"></i>
-                    <span>Multiple contributors</span>
-                </div>
-            </div>
-        </a>
-        
-        <a href="release-notes-v0.1.107.html" class="release-card">
-            <div class="release-version">
-                v0.1.107
-            </div>
-            <div class="release-date">Released: 2024-11-15</div>
-            <div class="release-summary">Major feature updates including enhanced chat history, improved context handling, and various bug fixes and performance improvements.</div>
-            <div class="release-stats">
-                <div class="stat">
-                    <i class="far fa-list-alt"></i>
-                    <span>Multiple changes</span>
-                </div>
-                <div class="stat">
-                    <i class="far fa-user"></i>
-                    <span>Multiple contributors</span>
-                </div>
-            </div>
-        </a>
-        
-        <a href="release-notes-v17-release-note-agent.html" class="release-card">
+        <div class="release-card">
             <div class="release-version">
                 v17-release-note-agent
             </div>
-            <div class="release-date">Released: 2024-10-15</div>
-            <div class="release-summary">Release notes agent improvements and workflow enhancements for automated documentation generation.</div>
+            <div class="release-date">June 18, 2025</div>
+            <div class="release-summary">Improved release notes generation system with enhanced CI integration and simplified agent configuration.</div>
             <div class="release-stats">
                 <div class="stat">
-                    <i class="far fa-list-alt"></i>
-                    <span>Agent improvements</span>
+                    <i class="far fa-times-circle"></i>
+                    <span>1 Bug Fix</span>
                 </div>
                 <div class="stat">
-                    <i class="far fa-user"></i>
-                    <span>1 contributor</span>
+                    <i class="fas fa-code"></i>
+                    <span>1 Refactoring</span>
                 </div>
             </div>
-        </a>
+            <a href="release-notes/release-notes-v17-release-note-agent.html" class="release-button" target="_blank">
+                <i class="far fa-file-alt"></i>
+                View Release Notes
+            </a>
+        </div>
         
-        <a href="release-notes-v8-release-note-agent.html" class="release-card">
+        <div class="release-card">
             <div class="release-version">
-                v8-release-note-agent
+                v0.1.129
             </div>
-            <div class="release-date">Released: 2024-09-15</div>
-            <div class="release-summary">Initial release notes agent implementation with automated changelog generation capabilities.</div>
+            <div class="release-date">June 16, 2025</div>
+            <div class="release-summary">Comprehensive automated release notes generation system with documentation improvements and configuration updates.</div>
             <div class="release-stats">
                 <div class="stat">
-                    <i class="far fa-list-alt"></i>
-                    <span>Initial release</span>
+                    <i class="far fa-lightbulb"></i>
+                    <span>1 Feature</span>
                 </div>
                 <div class="stat">
-                    <i class="far fa-user"></i>
-                    <span>1 contributor</span>
+                    <i class="fas fa-book"></i>
+                    <span>Documentation</span>
+                </div>
+                <div class="stat">
+                    <i class="fas fa-code"></i>
+                    <span>Refactoring</span>
                 </div>
             </div>
-        </a>
+            <a href="release-notes/release-notes-v0.1.129.html" class="release-button" target="_blank">
+                <i class="far fa-file-alt"></i>
+                View Release Notes
+            </a>
+        </div>
+        
+        <div class="release-card">
+            <div class="release-version">
+                v0.1.128
+            </div>
+            <div class="release-date">December 15, 2024</div>
+            <div class="release-summary">Release notes website infrastructure improvements and agent enhancements.</div>
+            <div class="release-stats">
+                <div class="stat">
+                    <i class="far fa-lightbulb"></i>
+                    <span>2 Features</span>
+                </div>
+                <div class="stat">
+                    <i class="far fa-times-circle"></i>
+                    <span>1 Bug Fix</span>
+                </div>
+            </div>
+            <a href="release-notes/release-notes-v0.1.128.html" class="release-button" target="_blank">
+                <i class="far fa-file-alt"></i>
+                View Release Notes
+            </a>
+        </div>
+        
+        <div class="release-card">
+            <div class="release-version">
+                v0.1.107
+            </div>
+            <div class="release-date">Earlier Release</div>
+            <div class="release-summary">Previous version with various improvements and bug fixes.</div>
+            <div class="release-stats">
+                <div class="stat">
+                    <i class="fas fa-history"></i>
+                    <span>Legacy</span>
+                </div>
+            </div>
+            <a href="release-notes/release-notes-v0.1.107.html" class="release-button" target="_blank">
+                <i class="far fa-file-alt"></i>
+                View Release Notes
+            </a>
+        </div>
     </div>
     
     <div class="footer">
         <p><em>This page is automatically updated when new releases are published.</em></p>
-        <p style="margin-top: 10px; font-size: 0.8rem; color: #999;">Last updated: June 19, 2025 at 8:49 AM UTC</p>
+        <p style="margin-top: 10px; font-size: 0.8rem; color: #999;">Last updated: June 19, 2025</p>
     </div>
 </body>
 </html>
