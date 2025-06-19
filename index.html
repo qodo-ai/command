@@ -42,17 +42,6 @@
             margin-bottom: 20px;
         }
         
-        .version-badge {
-            display: inline-block;
-            padding: 8px 16px;
-            background-color: #f8f8f8;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 20px;
-        }
-        
         .github-link {
             display: inline-block;
             padding: 12px 20px;
@@ -73,108 +62,83 @@
             margin-right: 8px;
         }
         
-        .all-releases {
-            margin-top: 50px;
-        }
-        
-        .all-releases h2 {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        
-        .release-notes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            max-width: 800px;
-            margin: 0 auto;
-            gap: 25px;
-        }
-        
-        .release-note-card {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            padding: 25px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            transition: box-shadow 0.2s, transform 0.2s;
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-        
-        .release-note-card:hover {
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-            transform: translateY(-2px);
-        }
-        
-        .release-note-title {
-            margin-bottom: 8px;
-        }
-        
-        .release-note-title-main {
-            font-size: 1.1rem;
-            font-weight: 500;
-            color: #666;
-            margin-bottom: 4px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .release-note-version {
-            font-size: 1.4rem;
-            font-weight: 700;
-            color: #333;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        
-        .release-note-date {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 12px;
-        }
-        
-        .release-note-summary {
-            color: #555;
-            margin-bottom: 15px;
-            line-height: 1.5;
-            flex-grow: 1;
-        }
-        
-        .release-note-link {
-            display: inline-block;
-            padding: 8px 16px;
+        .intro {
             background-color: #f8f8f8;
             border: 1px solid #ddd;
             border-radius: 4px;
-            color: #333;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background-color 0.2s;
-        }
-        
-        .release-note-link:hover {
-            background-color: #e8e8e8;
-        }
-        
-        .loading {
+            padding: 30px;
+            margin-bottom: 40px;
             text-align: center;
-            padding: 40px;
+        }
+        
+        .releases-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .release-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 25px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            transition: box-shadow 0.2s, transform 0.2s;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .release-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+        
+        .release-version {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .release-date {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+        
+        .release-summary {
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+        
+        .release-stats {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85rem;
             color: #666;
         }
         
-        .error {
-            text-align: center;
-            padding: 40px;
-            color: #d32f2f;
-            background-color: #ffebee;
-            border-radius: 4px;
-            margin: 20px 0;
+        .stat {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .latest-badge {
+            background-color: #000;
+            color: #fff;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
         }
         
         .footer {
@@ -184,6 +148,18 @@
             text-align: center;
             color: #666;
             font-size: 0.9rem;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 60px 30px;
+            color: #666;
+        }
+        
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: #ccc;
         }
         
         @media (max-width: 768px) {
@@ -200,16 +176,12 @@
                 font-size: 2rem;
             }
             
-            .all-releases {
-                margin-top: 40px;
-            }
-            
-            .release-notes-grid {
+            .releases-grid {
                 grid-template-columns: 1fr;
-                gap: 20px;
+                gap: 15px;
             }
             
-            .release-note-card {
+            .release-card {
                 padding: 20px;
             }
         }
@@ -217,111 +189,132 @@
 </head>
 <body>
     <div class="header">
-        <h1><i class="fas fa-file-alt"></i> Qodo CLI Release Notes</h1>
+        <h1>Qodo CLI Release Notes</h1>
         <p class="subtitle">Complete changelog and release history</p>
-        <div class="version-badge">Latest: v8-release-note-agent</div>
-        <br>
         <a href="https://github.com/qodo-ai/qodo-cli" class="github-link" target="_blank">
             <i class="fab fa-github"></i>
             View on GitHub
         </a>
     </div>
     
-    <div id="loading" class="loading">
-        <i class="fas fa-spinner fa-spin"></i> Loading release notes...
+    <div class="intro">
+        <p>Welcome to the Qodo CLI release notes archive. Here you can find detailed information about all releases, including new features, bug fixes, and breaking changes.</p>
     </div>
     
-    <div id="error" class="error" style="display: none;">
-        <i class="fas fa-exclamation-triangle"></i> Failed to load release notes. Please try again later.
-    </div>
-    
-    <div id="all-releases-container" class="all-releases" style="display: none;">
-        <h2><i class="fas fa-file-alt"></i> All Releases</h2>
-        <div id="release-notes-grid" class="release-notes-grid">
-            <!-- All releases will be populated here -->
-        </div>
+    <div class="releases-grid">
+        <a href="release-notes-v20-release-note-agent.html" class="release-card">
+            <div class="release-version">
+                v20-release-note-agent
+                <span class="latest-badge">Latest</span>
+            </div>
+            <div class="release-date">Released: 2025-06-19</div>
+            <div class="release-summary">Enhanced CI/CD workflow for release notes generation with improved debugging, file handling, and error management. Updated agent configuration for streamlined index.html generation.</div>
+            <div class="release-stats">
+                <div class="stat">
+                    <i class="far fa-list-alt"></i>
+                    <span>2 changes</span>
+                </div>
+                <div class="stat">
+                    <i class="far fa-user"></i>
+                    <span>1 contributor</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="release-notes-v0.1.129.html" class="release-card">
+            <div class="release-version">
+                v0.1.129
+            </div>
+            <div class="release-date">Released: 2024-12-16</div>
+            <div class="release-summary">Version bump and test execution improvements in CI pipeline with enhanced model selection and best practices support.</div>
+            <div class="release-stats">
+                <div class="stat">
+                    <i class="far fa-list-alt"></i>
+                    <span>Multiple changes</span>
+                </div>
+                <div class="stat">
+                    <i class="far fa-user"></i>
+                    <span>Multiple contributors</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="release-notes-v0.1.128.html" class="release-card">
+            <div class="release-version">
+                v0.1.128
+            </div>
+            <div class="release-date">Released: 2024-12-15</div>
+            <div class="release-summary">Enhanced model selection with support for GPT-4.0, GPT-o1-preview, GPT-o1-mini, Claude 3.5 Sonnet, and Gemini 1.5 Pro. Added best practices support and chat improvements.</div>
+            <div class="release-stats">
+                <div class="stat">
+                    <i class="far fa-list-alt"></i>
+                    <span>Multiple changes</span>
+                </div>
+                <div class="stat">
+                    <i class="far fa-user"></i>
+                    <span>Multiple contributors</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="release-notes-v0.1.107.html" class="release-card">
+            <div class="release-version">
+                v0.1.107
+            </div>
+            <div class="release-date">Released: 2024-11-15</div>
+            <div class="release-summary">Major feature updates including enhanced chat history, improved context handling, and various bug fixes and performance improvements.</div>
+            <div class="release-stats">
+                <div class="stat">
+                    <i class="far fa-list-alt"></i>
+                    <span>Multiple changes</span>
+                </div>
+                <div class="stat">
+                    <i class="far fa-user"></i>
+                    <span>Multiple contributors</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="release-notes-v17-release-note-agent.html" class="release-card">
+            <div class="release-version">
+                v17-release-note-agent
+            </div>
+            <div class="release-date">Released: 2024-10-15</div>
+            <div class="release-summary">Release notes agent improvements and workflow enhancements for automated documentation generation.</div>
+            <div class="release-stats">
+                <div class="stat">
+                    <i class="far fa-list-alt"></i>
+                    <span>Agent improvements</span>
+                </div>
+                <div class="stat">
+                    <i class="far fa-user"></i>
+                    <span>1 contributor</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="release-notes-v8-release-note-agent.html" class="release-card">
+            <div class="release-version">
+                v8-release-note-agent
+            </div>
+            <div class="release-date">Released: 2024-09-15</div>
+            <div class="release-summary">Initial release notes agent implementation with automated changelog generation capabilities.</div>
+            <div class="release-stats">
+                <div class="stat">
+                    <i class="far fa-list-alt"></i>
+                    <span>Initial release</span>
+                </div>
+                <div class="stat">
+                    <i class="far fa-user"></i>
+                    <span>1 contributor</span>
+                </div>
+            </div>
+        </a>
     </div>
     
     <div class="footer">
-        <p><em>Release notes are generated automatically by the Qodo CLI release notes agent.</em></p>
-        <p style="margin-top: 10px; font-size: 0.8rem; color: #999;">
-            Last updated: <span id="last-updated">June 17, 2025</span>
-        </p>
+        <p><em>This page is automatically updated when new releases are published.</em></p>
+        <p style="margin-top: 10px; font-size: 0.8rem; color: #999;">Last updated: June 19, 2025 at 8:49 AM UTC</p>
     </div>
-    
-    <script>
-        async function fetchReleaseNotes() {
-            return [
-                {
-                    title: "Release Notes v8-release-note-agent",
-                    date: "2025-06-17",
-                    summary: "This release focuses on improving the CI/CD workflow for release notes generation with enhanced debugging capabilities, better error handling, and more robust validation processes.",
-                    link: "release-notes/release-notes-v8-release-note-agent.html"
-                },
-                {
-                    title: "Release Notes v0.1.129",
-                    date: "2025-06-16",
-                    summary: "This release introduces a comprehensive automated release notes generation system and includes various documentation improvements and configuration updates.",
-                    link: "release-notes/release-notes-v0.1.129.html"
-                },
-                {
-                    title: "Release Notes v0.1.107",
-                    date: "2025-06-11",
-                    summary: "Technical maintenance release with version updates and webpack configuration improvements for enhanced build process and module resolution.",
-                    link: "release-notes/release-notes-v0.1.107.html"
-                }
-            ];
-        }
-        
-        async function loadReleaseNotes() {
-            try {
-                const releaseNotes = await fetchReleaseNotes();
-                const allReleasesContainer = document.getElementById('all-releases-container');
-                const releaseNotesGrid = document.getElementById('release-notes-grid');
-                const loading = document.getElementById('loading');
-                const error = document.getElementById('error');
-                
-                if (releaseNotes && releaseNotes.length > 0) {
-                    // Populate all releases in a single grid
-                    releaseNotesGrid.innerHTML = releaseNotes.map((note, index) => `
-                        <div class="release-note-card">
-                            <div class="release-note-title">
-                                <div class="release-note-title-main">
-                                    <i class="far fa-file-alt"></i>
-                                    Release Notes
-                                </div>
-                                <div class="release-note-version">${note.title.replace('Release Notes ', '')}</div>
-                            </div>
-                            <div class="release-note-date">
-                                <i class="far fa-calendar"></i>
-                                ${new Date(note.date).toLocaleDateString('en-US', { 
-                                    year: 'numeric', 
-                                    month: 'long', 
-                                    day: 'numeric' 
-                                })}
-                            </div>
-                            <p class="release-note-summary">${note.summary}</p>
-                            <a href="${note.link}" class="release-note-link">
-                                <i class="fas fa-external-link-alt"></i>
-                                View Release Notes
-                            </a>
-                        </div>
-                    `).join('');
-                    
-                    loading.style.display = 'none';
-                    allReleasesContainer.style.display = 'block';
-                } else {
-                    throw new Error('No release notes found');
-                }
-            } catch (err) {
-                console.error('Error loading release notes:', err);
-                document.getElementById('loading').style.display = 'none';
-                document.getElementById('error').style.display = 'block';
-            }
-        }
-        
-        // Load release notes when page loads
-        document.addEventListener('DOMContentLoaded', loadReleaseNotes);
-    </script>
 </body>
 </html>
