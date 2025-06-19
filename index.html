@@ -114,12 +114,17 @@
             font-size: 1.4rem;
             font-weight: 700;
             color: #333;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+        
+        .release-version-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            flex: 1;
+            min-width: 0;
         }
         
         .release-date {
@@ -251,7 +256,7 @@
                     Release Notes
                 </div>
                 <div class="release-version">
-                    v21-release-note-agent
+                    <span class="release-version-text">v21-release-note-agent</span>
                     <span class="latest-badge">Latest</span>
                 </div>
             </div>
@@ -280,7 +285,7 @@
                     Release Notes
                 </div>
                 <div class="release-version">
-                    v20-release-note-agent
+                    <span class="release-version-text">v20-release-note-agent</span>
                 </div>
             </div>
             <div class="release-date">June 19, 2025</div>
@@ -304,7 +309,7 @@
                     Release Notes
                 </div>
                 <div class="release-version">
-                    v17-release-note-agent
+                    <span class="release-version-text">v17-release-note-agent</span>
                 </div>
             </div>
             <div class="release-date">June 18, 2025</div>
@@ -332,7 +337,7 @@
                     Release Notes
                 </div>
                 <div class="release-version">
-                    v0.1.129
+                    <span class="release-version-text">v0.1.129</span>
                 </div>
             </div>
             <div class="release-date">June 16, 2025</div>
@@ -364,7 +369,7 @@
                     Release Notes
                 </div>
                 <div class="release-version">
-                    v0.1.128
+                    <span class="release-version-text">v0.1.128</span>
                 </div>
             </div>
             <div class="release-date">December 15, 2024</div>
@@ -392,7 +397,7 @@
                     Release Notes
                 </div>
                 <div class="release-version">
-                    v0.1.107
+                    <span class="release-version-text">v0.1.107</span>
                 </div>
             </div>
             <div class="release-date">Earlier Release</div>
