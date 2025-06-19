@@ -1,80 +1,15 @@
 {
   "files": [
-    "release-notes-v24-release-note-agent.html",
-    "release-notes-v23-release-note-agent.html",
-    "release-notes-v22-release-note-agent.html",
-    "release-notes-v21-release-note-agent.html",
-    "release-notes-v20-release-note-agent.html",
-    "release-notes-v17-release-note-agent.html",
-    "release-notes-v0.1.129.html",
-    "release-notes-v0.1.128.html",
     "release-notes-v0.1.107.html",
+    "release-notes-v0.1.128.html",
+    "release-notes-v0.1.129.html",
+    "release-notes-v17-release-note-agent.html",
+    "release-notes-v20-release-note-agent.html",
+    "release-notes-v23-release-note-agent.html",
+    "release-notes-v24-release-note-agent.html",
     "release-notes-v8-release-note-agent.html"
   ],
-  "lastUpdated": "2025-06-19T12:00:00Z",
+  "lastUpdated": "2025-06-19T11:50:46.810Z",
   "description": "Manifest file for release notes - automatically updated by the release notes agent",
-  "count": 10,
-  "latestVersion": "v24-release-note-agent",
-  "versions": [
-    {
-      "version": "v24-release-note-agent",
-      "file": "release-notes-v24-release-note-agent.html",
-      "date": "2025-06-19",
-      "title": "Release Notes v24-release-note-agent"
-    },
-    {
-      "version": "v23-release-note-agent",
-      "file": "release-notes-v23-release-note-agent.html",
-      "date": "2025-06-19",
-      "title": "Release Notes v23-release-note-agent"
-    },
-    {
-      "version": "v22-release-note-agent",
-      "file": "release-notes-v22-release-note-agent.html",
-      "date": "2025-06-19",
-      "title": "Release Notes v22-release-note-agent"
-    },
-    {
-      "version": "v21-release-note-agent",
-      "file": "release-notes-v21-release-note-agent.html",
-      "date": "2025-06-19",
-      "title": "Release Notes v21-release-note-agent"
-    },
-    {
-      "version": "v20-release-note-agent",
-      "file": "release-notes-v20-release-note-agent.html",
-      "date": "2025-06-19",
-      "title": "Release Notes v20-release-note-agent"
-    },
-    {
-      "version": "v17-release-note-agent",
-      "file": "release-notes-v17-release-note-agent.html",
-      "date": "2025-06-18",
-      "title": "Release Notes v17-release-note-agent"
-    },
-    {
-      "version": "0.1.129",
-      "file": "release-notes-v0.1.129.html",
-      "date": "2025-06-16",
-      "title": "Release Notes v0.1.129"
-    },
-    {
-      "version": "0.1.128",
-      "file": "release-notes-v0.1.128.html",
-      "date": "2024-12-15",
-      "title": "Release Notes v0.1.128"
-    },
-    {
-      "version": "0.1.107",
-      "file": "release-notes-v0.1.107.html",
-      "date": "2024-12-01",
-      "title": "Release Notes v0.1.107"
-    },
-    {
-      "version": "v8-release-note-agent",
-      "file": "release-notes-v8-release-note-agent.html",
-      "date": "2025-06-18",
-      "title": "Release Notes v8-release-note-agent"
-    }
-  ]
+  "count": 8
 }
