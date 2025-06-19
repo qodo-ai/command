@@ -1,5 +1,6 @@
 {
   "files": [
+    "release-notes-v24-release-note-agent.html",
     "release-notes-v23-release-note-agent.html",
     "release-notes-v22-release-note-agent.html",
     "release-notes-v21-release-note-agent.html",
@@ -12,9 +13,15 @@
   ],
   "lastUpdated": "2025-06-19T12:00:00Z",
   "description": "Manifest file for release notes - automatically updated by the release notes agent",
-  "count": 9,
-  "latestVersion": "v23-release-note-agent",
+  "count": 10,
+  "latestVersion": "v24-release-note-agent",
   "versions": [
+    {
+      "version": "v24-release-note-agent",
+      "file": "release-notes-v24-release-note-agent.html",
+      "date": "2025-06-19",
+      "title": "Release Notes v24-release-note-agent"
+    },
     {
       "version": "v23-release-note-agent",
       "file": "release-notes-v23-release-note-agent.html",
