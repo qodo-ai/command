@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Release Notes - v22-release-note-agent | Qodo CLI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #fff;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #000;
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .release-meta {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 8px 12px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .meta-item strong {
+            color: #333;
+        }
+        
+        .github-link {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        
+        .github-link:hover {
+            background-color: #e8e8e8;
+        }
+        
+        .github-link i {
+            margin-right: 8px;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 30px;
+            overflow-x: auto;
+        }
+        
+        .nav-tab {
+            padding: 12px 20px;
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            cursor: pointer;
+            font-weight: 500;
+            color: #666;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+        
+        .nav-tab:first-child {
+            border-top-left-radius: 4px;
+        }
+        
+        .nav-tab:last-child {
+            border-top-right-radius: 4px;
+        }
+        
+        .nav-tab.active {
+            background-color: #fff;
+            color: #333;
+            border-bottom: 1px solid #fff;
+            margin-bottom: -1px;
+        }
+        
+        .nav-tab:hover:not(.active) {
+            background-color: #e8e8e8;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .summary-box {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .summary-box h2 {
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section h2 {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section h3 {
+            font-size: 1.2rem;
+            color: #333;
+            margin: 20px 0 10px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .section h4 {
+            font-size: 1rem;
+            color: #555;
+            margin: 15px 0 8px 0;
+        }
+        
+        .change-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 20px;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .change-item h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .change-item p {
+            margin-bottom: 10px;
+        }
+        
+        .change-item ul {
+            margin-left: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .change-item li {
+            margin-bottom: 5px;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-right: 8px;
+        }
+        
+        .badge-feature {
+            background-color: #e8f5e8;
+            color: #2d5a2d;
+        }
+        
+        .badge-improvement {
+            background-color: #e8f0ff;
+            color: #1a4480;
+        }
+        
+        .badge-fix {
+            background-color: #ffe8e8;
+            color: #801a1a;
+        }
+        
+        .badge-breaking {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .code-block {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.9rem;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .comparison-table th {
+            background-color: #f8f8f8;
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #333;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .release-meta {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+            }
+            
+            .nav-tab {
+                border-radius: 0;
+                border-bottom: 1px solid #ddd;
+            }
+            
+            .nav-tab:first-child {
+                border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
+            }
+            
+            .nav-tab:last-child {
+                border-bottom-left-radius: 4px;
+                border-bottom-right-radius: 4px;
+                border-bottom: 1px solid #ddd;
+            }
+            
+            .nav-tab.active {
+                border-bottom: 1px solid #ddd;
+                margin-bottom: 0;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Release Notes - v22-release-note-agent</h1>
+        <div class="release-meta">
+            <div class="meta-item">
+                <strong>Release Date:</strong> June 19, 2025
+            </div>
+            <div class="meta-item">
+                <strong>Version:</strong> v22-release-note-agent
+            </div>
+        </div>
+        <a href="https://github.com/qodo-ai/qodo-gen-cli" class="github-link" target="_blank">
+            <i class="fab fa-github"></i>
+            View on GitHub
+        </a>
+    </div>
+    
+    <div class="nav-tabs">
+        <div class="nav-tab active" onclick="showTab('overview')">
+            <i class="fas fa-info-circle"></i> Overview
+        </div>
+        <div class="nav-tab" onclick="showTab('features')">
+            <i class="fas fa-star"></i> Features <span class="badge badge-feature">1</span>
+        </div>
+        <div class="nav-tab" onclick="showTab('improvements')">
+            <i class="fas fa-wrench"></i> Improvements <span class="badge badge-improvement">2</span>
+        </div>
+        <div class="nav-tab hidden" onclick="showTab('fixes')">
+            <i class="fas fa-bug"></i> Bug Fixes <span class="badge badge-fix">0</span>
+        </div>
+        <div class="nav-tab hidden" onclick="showTab('breaking')">
+            <i class="fas fa-exclamation-triangle"></i> Breaking Changes <span class="badge badge-breaking">0</span>
+        </div>
+        <div class="nav-tab" onclick="showTab('technical')">
+            <i class="fas fa-code"></i> Technical Details
+        </div>
+    </div>
+    
+    <div id="overview" class="tab-content active">
+        <div class="summary-box">
+            <h2><i class="fas fa-bullseye"></i> Release Summary</h2>
+            <p>This release focuses on improving the release notes generation system by streamlining the index.html management process. The major change removes the static HTML template approach in favor of a dynamic update system that reads and modifies the existing index.html file, ensuring better consistency and maintainability.</p>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span class="stat-number">1</span>
+                <div class="stat-label">New Features</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">2</span>
+                <div class="stat-label">Improvements</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">0</span>
+                <div class="stat-label">Bug Fixes</div>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">0</span>
+                <div class="stat-label">Breaking Changes</div>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2><i class="fas fa-list"></i> What's Changed</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Before (v21)</th>
+                        <th>After (v22)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Used a large static HTML template (288 lines)</td>
+                        <td>Dynamic parsing and updating of existing index.html</td>
+                    </tr>
+                    <tr>
+                        <td>Required complete template replacement for each update</td>
+                        <td>Preserves all existing content and structure</td>
+                    </tr>
+                    <tr>
+                        <td>Less flexible for maintaining existing content</td>
+                        <td>More maintainable and flexible approach</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="section">
+            <h2><i class="fas fa-rocket"></i> Benefits</h2>
+            <ul>
+                <li><strong>Reduced Complexity:</strong> Eliminated the need to maintain a large HTML template in the configuration</li>
+                <li><strong>Better Consistency:</strong> Ensures new releases match the existing design and format</li>
+                <li><strong>Improved Maintainability:</strong> Easier to update and modify the release notes system</li>
+                <li><strong>Enhanced Flexibility:</strong> Can adapt to changes in the existing index.html structure</li>
+                <li><strong>Error Prevention:</strong> Reduces the risk of breaking existing styling or structure</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div id="features" class="tab-content">
+        <div class="section">
+            <h2><i class="fas fa-star"></i> New Features</h2>
+            
+            <div class="change-item">
+                <h3><i class="fas fa-sync-alt"></i> Dynamic Index.html Update System</h3>
+                <p><strong>Enhanced Index Management:</strong> Replaced static HTML template generation with intelligent parsing and updating of existing index.html files</p>
+                <ul>
+                    <li><strong>Preserves Existing Structure:</strong> The system now reads the current index.html from the public_repo directory and maintains all existing styling, structure, and content</li>
+                    <li><strong>Smart Badge Management:</strong> Automatically manages the "Latest" badge by adding it to new releases and removing it from previous ones</li>
+                    <li><strong>Intelligent Parsing:</strong> Understands the existing HTML structure and adapts accordingly</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="improvements" class="tab-content">
+        <div class="section">
+            <h2><i class="fas fa-wrench"></i> Improvements</h2>
+            
+            <div class="change-item">
+                <h3><i class="fas fa-cog"></i> Release Notes Agent Configuration</h3>
+                <p><strong>Simplified Instructions:</strong> Streamlined the agent configuration by removing the large HTML template block and replacing it with clear, step-by-step update instructions</p>
+                <ul>
+                    <li><strong>Better Error Handling:</strong> Enhanced instructions for handling edge cases like first releases and empty states</li>
+                    <li><strong>Improved Maintainability:</strong> The new approach reduces configuration complexity and makes the system easier to maintain</li>
+                    <li><strong>Clearer Documentation:</strong> More comprehensive and easier to follow instructions</li>
+                </ul>
+            </div>
+            
+            <div class="change-item">
+                <h3><i class="fas fa-palette"></i> Index.html Management</h3>
+                <p><strong>Consistent Formatting:</strong> Ensures all release cards follow the same format as existing cards</p>
+                <ul>
+                    <li><strong>Proper Link Handling:</strong> Maintains the critical 'release-notes/' path prefix for all links</li>
+                    <li><strong>Timestamp Updates:</strong> Automatically updates the "Last updated" timestamp in the footer</li>
+                    <li><strong>Version Sorting:</strong> Maintains proper version sorting with newest releases first</li>
+                    <li><strong>Content Preservation:</strong> All existing styling and structure are preserved during updates</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div id="fixes" class="tab-content hidden">
+        <div class="section">
+            <h2><i class="fas fa-bug"></i> Bug Fixes</h2>
+            <p>No bug fixes in this release.</p>
+        </div>
+    </div>
+    
+    <div id="breaking" class="tab-content hidden">
+        <div class="section">
+            <h2><i class="fas fa-exclamation-triangle"></i> Breaking Changes</h2>
+            <p>No breaking changes in this release.</p>
+        </div>
+    </div>
+    
+    <div id="technical" class="tab-content">
+        <div class="section">
+            <h2><i class="fas fa-code"></i> Technical Changes</h2>
+            
+            <div class="change-item">
+                <h3><i class="fas fa-file-code"></i> Configuration Updates</h3>
+                <h4>agents/release_notes.toml:</h4>
+                <ul>
+                    <li>Removed 288-line HTML template block</li>
+                    <li>Added 10-step dynamic update instructions</li>
+                    <li>Enhanced error handling and edge case management</li>
+                    <li>Improved documentation for release card format</li>
+                </ul>
+            </div>
+            
+            <div class="change-item">
+                <h3><i class="fas fa-cogs"></i> Process Improvements</h3>
+                <ul>
+                    <li><strong>Dynamic Content Management:</strong> The system now intelligently parses existing HTML structure instead of using static templates</li>
+                    <li><strong>Content Preservation:</strong> All existing content, styling, and structure are preserved during updates</li>
+                    <li><strong>Flexible Release Card Creation:</strong> New releases are added using the same format as existing cards</li>
+                </ul>
+            </div>
+            
+            <div class="change-item">
+                <h3><i class="fas fa-list-ol"></i> Implementation Details</h3>
+                <p>The new system follows these steps:</p>
+                <ol>
+                    <li>Reads the existing index.html from the public_repo directory</li>
+                    <li>Parses the HTML structure to understand the current layout</li>
+                    <li>Extracts existing release cards from the releases-grid div</li>
+                    <li>Creates a new release card using the same format as existing cards</li>
+                    <li>Updates the "Latest" badge appropriately</li>
+                    <li>Sorts releases by version (newest first)</li>
+                    <li>Updates the footer timestamp</li>
+                    <li>Saves the updated index.html to the release-notes directory</li>
+                </ol>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2><i class="fas fa-book"></i> Documentation</h2>
+            <p>The release notes agent now includes comprehensive instructions for:</p>
+            <ul>
+                <li>Reading and parsing existing HTML structure</li>
+                <li>Creating properly formatted release cards</li>
+                <li>Managing the "Latest" badge system</li>
+                <li>Handling empty states and edge cases</li>
+                <li>Maintaining proper link formatting with path prefixes</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p><em>This release continues our commitment to improving the developer experience and maintaining high-quality documentation and release management tools.</em></p>
+        <p style="margin-top: 10px; font-size: 0.8rem; color: #999;">Generated on June 19, 2025</p>
+    </div>
+    
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.closest('.nav-tab').classList.add('active');
+        }
+        
+        // Hide tabs with zero items on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabsToCheck = ['fixes', 'breaking'];
+            tabsToCheck.forEach(tabName => {
+                const badge = document.querySelector(`[onclick="showTab('${tabName}')"] .badge`);
+                if (badge && badge.textContent.trim() === '0') {
+                    document.querySelector(`[onclick="showTab('${tabName}')"]`).classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
