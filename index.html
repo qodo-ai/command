@@ -86,7 +86,9 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             transition: box-shadow 0.2s, transform 0.2s;
             color: inherit;
-            display: block;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
         
         .release-card:hover {
@@ -94,11 +96,27 @@
             transform: translateY(-2px);
         }
         
+        .release-title {
+            margin-bottom: 8px;
+        }
+        
+        .release-title-main {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #666;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
         .release-version {
             font-size: 1.4rem;
             font-weight: 700;
             color: #333;
-            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -114,6 +132,7 @@
             color: #555;
             margin-bottom: 15px;
             line-height: 1.5;
+            flex-grow: 1;
         }
         
         .release-stats {
@@ -142,21 +161,22 @@
         
         .release-button {
             display: inline-block;
-            padding: 10px 20px;
-            background-color: #000;
-            color: #fff;
+            padding: 8px 16px;
+            background-color: #f5f5f5;
+            color: #777;
             text-decoration: none;
             border-radius: 4px;
-            font-weight: 500;
-            transition: background-color 0.2s;
-            border: none;
+            font-weight: 400;
+            transition: background-color 0.2s, color 0.2s;
+            border: 1px solid #e0e0e0;
             cursor: pointer;
+            margin-top: auto;
         }
         
         .release-button:hover {
-            background-color: #333;
+            background-color: #ebebeb;
             text-decoration: none;
-            color: #fff;
+            color: #555;
         }
         
         .release-button i {
@@ -225,9 +245,15 @@
     
     <div class="releases-grid">
         <div class="release-card">
-            <div class="release-version">
-                v21-release-note-agent
-                <span class="latest-badge">Latest</span>
+            <div class="release-title">
+                <div class="release-title-main">
+                    <i class="far fa-file-alt"></i>
+                    Release Notes
+                </div>
+                <div class="release-version">
+                    v21-release-note-agent
+                    <span class="latest-badge">Latest</span>
+                </div>
             </div>
             <div class="release-date">June 19, 2025</div>
             <div class="release-summary">Enhanced release notes system with comprehensive HTML template for index page, providing better visual presentation and navigation.</div>
@@ -248,8 +274,14 @@
         </div>
         
         <div class="release-card">
-            <div class="release-version">
-                v20-release-note-agent
+            <div class="release-title">
+                <div class="release-title-main">
+                    <i class="far fa-file-alt"></i>
+                    Release Notes
+                </div>
+                <div class="release-version">
+                    v20-release-note-agent
+                </div>
             </div>
             <div class="release-date">June 19, 2025</div>
             <div class="release-summary">CI improvements and fixes for the release notes generation workflow.</div>
@@ -266,8 +298,14 @@
         </div>
         
         <div class="release-card">
-            <div class="release-version">
-                v17-release-note-agent
+            <div class="release-title">
+                <div class="release-title-main">
+                    <i class="far fa-file-alt"></i>
+                    Release Notes
+                </div>
+                <div class="release-version">
+                    v17-release-note-agent
+                </div>
             </div>
             <div class="release-date">June 18, 2025</div>
             <div class="release-summary">Improved release notes generation system with enhanced CI integration and simplified agent configuration.</div>
@@ -288,8 +326,14 @@
         </div>
         
         <div class="release-card">
-            <div class="release-version">
-                v0.1.129
+            <div class="release-title">
+                <div class="release-title-main">
+                    <i class="far fa-file-alt"></i>
+                    Release Notes
+                </div>
+                <div class="release-version">
+                    v0.1.129
+                </div>
             </div>
             <div class="release-date">June 16, 2025</div>
             <div class="release-summary">Comprehensive automated release notes generation system with documentation improvements and configuration updates.</div>
@@ -314,8 +358,14 @@
         </div>
         
         <div class="release-card">
-            <div class="release-version">
-                v0.1.128
+            <div class="release-title">
+                <div class="release-title-main">
+                    <i class="far fa-file-alt"></i>
+                    Release Notes
+                </div>
+                <div class="release-version">
+                    v0.1.128
+                </div>
             </div>
             <div class="release-date">December 15, 2024</div>
             <div class="release-summary">Release notes website infrastructure improvements and agent enhancements.</div>
@@ -336,8 +386,14 @@
         </div>
         
         <div class="release-card">
-            <div class="release-version">
-                v0.1.107
+            <div class="release-title">
+                <div class="release-title-main">
+                    <i class="far fa-file-alt"></i>
+                    Release Notes
+                </div>
+                <div class="release-version">
+                    v0.1.107
+                </div>
             </div>
             <div class="release-date">Earlier Release</div>
             <div class="release-summary">Previous version with various improvements and bug fixes.</div>
