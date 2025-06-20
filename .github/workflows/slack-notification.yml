@@ -192,7 +192,7 @@ jobs:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_TITLE: "📋 Release Notes Website - Version ${{ steps.release-info.outputs.version }}"
           SLACK_MESSAGE: |
-            🚀 New release notes have been published by @${{ github.actor }}!
+            🚀 New release notes published by @${{ github.actor }}!
             
             📋 **All Release Notes**: ${{ steps.release-info.outputs.pages_url }}
             🆕 **Latest Release**: ${{ steps.release-info.outputs.release_note_url }}
