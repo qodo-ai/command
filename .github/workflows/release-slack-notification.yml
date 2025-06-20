@@ -3,6 +3,17 @@ name: Release Notes Slack Notification
 on:
   page_build:
     # This event triggers when GitHub Pages finishes building
+  workflow_dispatch:
+    # This allows manual triggering of the workflow
+    inputs:
+      version:
+        description: 'Version to notify about (optional - will use latest if not specified)'
+        required: false
+        type: string
+      message:
+        description: 'Custom message to include in the notification (optional)'
+        required: false
+        type: string
 
 jobs:
   notify-slack:
@@ -179,7 +190,7 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_TITLE: "📋 GitHub Pages Build Complete - Version ${{ steps.release-info.outputs.version }}"
+          SLACK_TITLE: "📋 Release Notes Website - Version ${{ steps.release-info.outputs.version }}"
           SLACK_MESSAGE: |
             🚀 New release notes have been published by @${{ github.actor }}!
             
