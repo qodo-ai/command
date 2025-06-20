@@ -117,7 +117,15 @@ jobs:
                   type: "header",
                   text: {
                     type: "plain_text",
-                    text: "📋 New Release Notes Published: \($repo) \($version) by @\($actor)",
+                    text: "New Release Notes Published",
+                    emoji: true
+                  }
+                },
+ {
+                  type: "section",
+                  text: {
+                    type: "plain_text",
+                    text: "($version) by @\($actor)",
                     emoji: true
                   }
                 },
