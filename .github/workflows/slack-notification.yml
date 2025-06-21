@@ -1,0 +1,225 @@
+name: Release Notes Slack Notification
+
+on:
+  page_build:
+    # This event triggers when GitHub Pages finishes building
+  workflow_dispatch:
+    # This allows manual triggering of the workflow
+    inputs:
+      version:
+        description: 'Version to notify about (optional - will use latest if not specified)'
+        required: false
+        type: string
+      message:
+        description: 'Custom message to include in the notification (optional)'
+        required: false
+        type: string
+
+jobs:
+  notify-slack:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Get latest release info
+        id: release-info
+        run: |
+          # Check if manifest.json exists
+          if [ ! -f "release-notes/manifest.json" ]; then
+            echo "❌ manifest.json not found"
+            exit 1
+          fi
+          
+          # Get the latest release note file from manifest.json
+          LATEST_FILE=$(jq -r '.files[-1]' release-notes/manifest.json)
+          
+          if [ "$LATEST_FILE" = "null" ] || [ -z "$LATEST_FILE" ]; then
+            echo "❌ No release files found in manifest"
+            exit 1
+          fi
+          
+          echo "latest_file=$LATEST_FILE" >> $GITHUB_OUTPUT
+          echo "✅ Latest file: $LATEST_FILE"
+          
+          # Extract version from filename
+          # Handle both formats: release-notes-v0.1.107.html and release-notes-v24-release-note-agent.html
+          VERSION=$(echo "$LATEST_FILE" | sed -n 's/release-notes-\(.*\)\.html/\1/p')
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "✅ Version: $VERSION"
+          
+          # Get repository info
+          REPO_NAME="${{ github.repository }}"
+          REPO_SHORT_NAME="${{ github.event.repository.name }}"
+          echo "repo_name=$REPO_NAME" >> $GITHUB_OUTPUT
+          echo "repo_short_name=$REPO_SHORT_NAME" >> $GITHUB_OUTPUT
+          
+          # Get GitHub Pages URL
+          REPO_OWNER="${{ github.repository_owner }}"
+          
+          # Try to determine the correct Pages URL format
+          # For user/org pages: username.github.io
+          # For project pages: username.github.io/repo-name
+          if [ "$REPO_SHORT_NAME" = "${REPO_OWNER}.github.io" ]; then
+            PAGES_URL="https://${REPO_OWNER}.github.io"
+          else
+            PAGES_URL="https://${REPO_OWNER}.github.io/${REPO_SHORT_NAME}"
+          fi
+          
+          echo "pages_url=$PAGES_URL" >> $GITHUB_OUTPUT
+          echo "✅ Pages URL: $PAGES_URL"
+          
+          # Specific release note URL
+          RELEASE_NOTE_URL="${PAGES_URL}/release-notes/${LATEST_FILE}"
+          echo "release_note_url=$RELEASE_NOTE_URL" >> $GITHUB_OUTPUT
+          echo "✅ Release note URL: $RELEASE_NOTE_URL"
+          
+          # GitHub changelog URL
+          CHANGELOG_URL="https://github.com/${REPO_NAME}/releases"
+          echo "changelog_url=$CHANGELOG_URL" >> $GITHUB_OUTPUT
+          echo "✅ Changelog URL: $CHANGELOG_URL"
+          
+          # Get build timestamp
+          BUILD_TIME=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+          echo "build_time=$BUILD_TIME" >> $GITHUB_OUTPUT
+
+      - name: Send Modern Slack Notification
+        id: slack_notification
+        run: |
+          VERSION="${{ steps.release-info.outputs.version }}"
+          REPO_NAME="${{ steps.release-info.outputs.repo_name }}"
+          REPO_SHORT_NAME="${{ steps.release-info.outputs.repo_short_name }}"
+          PAGES_URL="${{ steps.release-info.outputs.pages_url }}"
+          RELEASE_NOTE_URL="${{ steps.release-info.outputs.release_note_url }}"
+          CHANGELOG_URL="${{ steps.release-info.outputs.changelog_url }}"
+          BUILD_TIME="${{ steps.release-info.outputs.build_time }}"
+          ACTOR="${{ github.actor }}"
+
+          # Debug prints
+          echo "VERSION=$VERSION"
+          echo "REPO_NAME=$REPO_NAME"
+          echo "PAGES_URL=$PAGES_URL"
+          echo "RELEASE_NOTE_URL=$RELEASE_NOTE_URL"
+          echo "ACTOR=$ACTOR"
+
+          # Create modern Slack Block Kit message
+          slack_message=$(jq -n --arg repo "$REPO_SHORT_NAME" \
+                              --arg version "$VERSION" \
+                              --arg pages_url "$PAGES_URL" \
+                              --arg release_url "$RELEASE_NOTE_URL" \
+                              --arg changelog_url "$CHANGELOG_URL" \
+                              --arg actor "$ACTOR" \
+                              --arg build_time "$BUILD_TIME" \
+            '{
+              blocks: [
+                {
+                  type: "header",
+                  text: {
+                    type: "plain_text",
+                    text: "📋 New Release Notes Published: \($repo) \($version) by @\($actor)",
+                    emoji: true
+                  }
+                },
+                {
+                  type: "section",
+                  text: {
+                    type: "mrkdwn",
+                    text: "🚀 GitHub Pages has finished building! The latest release notes are now live."
+                  }
+                },
+                {
+                  type: "section",
+                  fields: [
+                    {
+                      type: "mrkdwn",
+                      text: "*📋 All Release Notes:*\n<\($pages_url)|View Complete Index>"
+                    },
+                    {
+                      type: "mrkdwn",
+                      text: "*🆕 Latest Release:*\n<\($release_url)|Version \($version)>"
+                    },
+                    {
+                      type: "mrkdwn",
+                      text: "*📝 GitHub Releases:*\n<\($changelog_url)|View on GitHub>"
+                    },
+                    {
+                      type: "mrkdwn",
+                      text: "*🕐 Build Time:*\n\($build_time)"
+                    }
+                  ]
+                },
+                {
+                  type: "section",
+                  text: {
+                    type: "mrkdwn",
+                    text: "💡 *Quick Access:* Bookmark <\($pages_url)|the release notes index> for easy access to all versions."
+                  }
+                },
+                {
+                  type: "context",
+                  elements: [
+                    {
+                      type: "mrkdwn",
+                      text: "🤖 Qodo CLI Release System | <https://github.com/\($repo)|Repository>"
+                    }
+                  ]
+                }
+              ]
+            }')
+
+          echo "Sending Slack notification..."
+          response=$(curl -s -X POST -H 'Content-type: application/json' --data "$slack_message" "$SLACK_WEBHOOK_URL")
+          echo "Slack response: $response"
+
+          # Check if the response is "ok" (webhook success)
+          if [ "$response" = "ok" ]; then
+            echo "✅ Slack notification sent successfully"
+            echo "SLACK_NOTIFICATION_SENT=true" >> $GITHUB_OUTPUT
+          else
+            echo "⚠️ Warning: Unexpected Slack response: $response"
+            echo "SLACK_NOTIFICATION_SENT=false" >> $GITHUB_OUTPUT
+            # Don't fail the job, just warn
+          fi
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fallback Slack notification
+        if: steps.slack_notification.outputs.SLACK_NOTIFICATION_SENT != 'true'
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_TITLE: "📋 Release Notes Website - Version ${{ steps.release-info.outputs.version }}"
+          SLACK_MESSAGE: |
+            🚀 New release notes have been published by @${{ github.actor }}!
+            
+            📋 **All Release Notes**: ${{ steps.release-info.outputs.pages_url }}
+            🆕 **Latest Release**: ${{ steps.release-info.outputs.release_note_url }}
+            📝 **GitHub Changelog**: ${{ steps.release-info.outputs.changelog_url }}
+            🏗️ **Repository**: https://github.com/${{ steps.release-info.outputs.repo_name }}
+            🕐 **Build Time**: ${{ steps.release-info.outputs.build_time }}
+            
+            💡 Bookmark the release notes index for easy access to all versions.
+          SLACK_COLOR: good
+          SLACK_FOOTER: "Qodo CLI Release System"
+          
+      - name: Debug information (on failure)
+        if: failure()
+        run: |
+          echo "🔍 Debug Information:"
+          echo "Repository: ${{ github.repository }}"
+          echo "Repository Owner: ${{ github.repository_owner }}"
+          echo "Repository Name: ${{ github.event.repository.name }}"
+          echo "Actor: ${{ github.actor }}"
+          echo "Event: ${{ github.event_name }}"
+          echo "Slack notification sent: ${{ steps.slack_notification.outputs.SLACK_NOTIFICATION_SENT }}"
+          echo ""
+          echo "📁 Directory contents:"
+          ls -la
+          echo ""
+          echo "📄 Release notes directory:"
+          ls -la release-notes/ || echo "release-notes directory not found"
+          echo ""
+          echo "📋 Manifest content:"
+          cat release-notes/manifest.json || echo "manifest.json not found"

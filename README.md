@@ -123,13 +123,13 @@ This repository includes a GitHub Action that makes it easy to integrate Qodo in
     prompt: "review"
 ```
 
-By default, this uses the example `agent.toml` included with the action. To use your own agent configuration, specify the `agentfile` input:
+By default, this uses the example `agent.toml` included with the action. To use your own agent configuration, specify the `agent-file` input:
 
 ```yaml
 - uses: qodo-ai/qodo-gen-cli@main
   with:
     prompt: "review"
-    agentfile: "./my-custom-agent.toml"  # Path relative to your repository root
+    agent-file: "./my-custom-agent.toml"  # Path relative to your repository root
 ```
 
 #### All Options
@@ -139,7 +139,7 @@ By default, this uses the example `agent.toml` included with the action. To use 
   with:
     prompt: "your prompt here"              # Required: The prompt or command to run
     model: "claude-4-sonnet"               # Optional: Specify AI model
-    agentfile: "path/to/agent.toml"        # Optional: Custom agent file (default: examples/agent.toml from action)
+    agent-file: "path/to/agent.toml"        # Optional: Custom agent file (default: examples/agent.toml from action)
     qodo-version: "latest"                 # Optional: @qodo/gen version (default: latest)
     key-value-pairs: |                     # Optional: Additional parameters
       coverage_threshold=80
@@ -206,7 +206,7 @@ jobs:
         uses: qodo-ai/qodo-gen-cli@v1
         with:
           prompt: "qodo-cover"
-          # agentfile: "${{ github.workspace }}/agent.toml"
+          # agent-file: "${{ github.workspace }}/agent.toml"
           key-value-pairs: |
             desired_coverage=90
         env:
@@ -262,7 +262,7 @@ jobs:
         uses: qodo-ai/qodo-gen-cli@v1
         with:
           prompt: "qodo-mention"
-          # agentfile: "${{ github.workspace }}/agent.toml"
+          # agent-file: "${{ github.workspace }}/agent.toml"
           key-value-pairs: |
             event_path=${{ github.event_path }}
         env:
@@ -304,7 +304,7 @@ jobs:
         uses: qodo-ai/qodo-gen-cli@v1
         with:
           prompt: qodo-release-notes
-          # agentfile: "${{ github.workspace }}/agent.toml"
+          # agent-file: "${{ github.workspace }}/agent.toml"
           key-value-pairs: |
             target_tag=${{ github.event.inputs.target_tag }}
             notes_file=RELEASE_NOTES.md
