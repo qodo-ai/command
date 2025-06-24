@@ -1,8 +1,0 @@
-# Define the review command
-[commands.review]
-description = "Analyze code changes using Qodo Merge and provide a categorized summary of suggestions."
-instructions = """
-Use Qodo Merge improve tool to analyze only the git diff code changes and provide detailed code suggestions.
-"""
-available_tools = ["Qodo Merge", "git", "filesystem"]
-
