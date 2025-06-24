@@ -12,12 +12,11 @@ inputs:
   agent-file:
     description: 'Path to custom agent.toml file (defaults to the example agent.toml included with this action)'
     required: false
-  agentfile:
-    description: 'DEPRECATED: Use agent-file instead. Path to custom agent.toml file'
+  mcp-file:
+    description: 'Path to custom mcp.json file (defaults to the example mcp.json included with this action)'
     required: false
-    deprecationMessage: 'The agentfile input has been deprecated. Please use agent-file instead.'
-  key-value-pairs:
-    description: 'Additional key-value pairs as JSON object or multiline string (e.g., {"key1": "value1", "key2": "value2"} or key1=value1 key2=value2)'
+  set-args:
+    description: 'Additional arguments in --set format (e.g., "--set commandArg1=commandVal1 --set commandArg2=commandVal2")'
     required: false
   qodo-version:
     description: 'Version of @qodo/gen to install (defaults to 0.1.122)'
@@ -35,11 +34,6 @@ runs:
     - name: Install dependencies
       shell: bash
       run: |
-        # Install jq for JSON parsing
-        if ! command -v jq &> /dev/null; then
-          sudo apt-get update && sudo apt-get install -y jq
-        fi
-        
         # Verify npx is available (should be installed with Node.js)
         if ! command -v npx &> /dev/null; then
           echo "Error: npx is not available. This should have been installed with Node.js."
@@ -103,28 +97,9 @@ runs:
           QODO_CMD="$QODO_CMD --agent-file=${{ github.action_path }}/examples/agent.toml"
         fi
         
-        # Parse and add key-value pairs
-        if [ ! -z "${{ inputs.key-value-pairs }}" ]; then
-          # Check if input is JSON format
-          if echo "${{ inputs.key-value-pairs }}" | jq -e . >/dev/null 2>&1; then
-            # Parse JSON and convert to --set key=value format
-            PAIRS=$(echo "${{ inputs.key-value-pairs }}" | jq -r 'to_entries | .[] | "--set \(.key)=\(.value)"' | tr '\n' ' ')
-            QODO_CMD="$QODO_CMD $PAIRS"
-          else
-            # Assume it's in key=value format separated by spaces or newlines
-            # Convert each key=value to --set key=value
-            PAIRS=""
-            while IFS= read -r line; do
-              # Skip empty lines
-              if [ ! -z "$line" ]; then
-                # Extract key and value from key=value format
-                if [[ "$line" == *"="* ]]; then
-                  PAIRS="$PAIRS --set $line"
-                fi
-              fi
-            done <<< "${{ inputs.key-value-pairs }}"
-            QODO_CMD="$QODO_CMD $PAIRS"
-          fi
+        # Add set arguments if specified
+        if [ ! -z "${{ inputs.set-args }}" ]; then
+          QODO_CMD="$QODO_CMD ${{ inputs.set-args }}"
         fi
         
         # Add the prompt at the end
