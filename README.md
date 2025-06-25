@@ -40,6 +40,12 @@ npm install -g @qodo/gen
 
 Go to the [Qodo Gen CLI documentation site](https://docs.qodo.ai/qodo-documentation/qodo-gen-cli) for full options and usage manuals.
 
+
+## Qodo and Community Agent Examples
+
+Check out [Qodo's agent repository in GitHub](https://github.com/qodo-ai/agents) to see examples of working agents.
+
+
 ## Resources
 
 - [Documentation](https://docs.qodo.ai/qodo-documentation/qodo-gen-cli)
