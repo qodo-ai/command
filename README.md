@@ -38,4 +38,4 @@ npm install -g @qodo/gen
 
 ## Usage
 
-Go to the [Qodo Gen CLI documentation site](https://docs.qodo.ai/qodo-documentation/qodo-gen/qodo-gen-cli) for full options and usage manuals.
+Go to the [Qodo Gen CLI documentation site](https://docs.qodo.ai/qodo-documentation/qodo-gen-cli) for full options and usage manuals.
