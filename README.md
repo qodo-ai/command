@@ -33,7 +33,7 @@ To use Qodo Command, you’ll need [Node.js](https://nodejs.org/en/download) and
 Then run:
 
 ```bash
-npm install -g @qodo/gen
+npm install -g @qodo/command
 ```
 
 ## Usage
