@@ -3,6 +3,8 @@
 Qodo Command is a command-line interface for running and managing AI agents.
 It allows you to automate complex workflows, interact with AI models and external tools using your own tools and schemas, and serve AI agents as HTTP services — all from your terminal.
 
+![Qodo Command Demo](demo.gif)
+
 ## Why should I use it?
 Qodo Command is designed for AI-powered developer productivity. It turns natural language into intelligent actions using your configured agents.
 Whether you're building tools, debugging code, or reviewing PRs, Qodo Command can help you code faster and better.
