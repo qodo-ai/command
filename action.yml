@@ -1,141 +1,40 @@
-name: 'Qodo Command Action'
-description: 'Run Qodo Command agents with custom TOML and MCP configurations'
-author: 'Qodo'
-
+name: Qodo Command Action
+description: Retired legacy Qodo Command Action
+author: Qodo
 inputs:
   prompt:
-    description: 'The prompt or command to run with Qodo'
+    description: The prompt or command to run with Qodo
     required: true
   model:
-    description: 'Specify a custom model to use'
+    description: Specify a custom model to use
     required: false
   agent-file:
-    description: 'Path to custom agent.toml file (defaults to the example agent.toml included with this action)'
+    description: Path to custom agent.toml file (defaults to the example agent.toml included with this
+      action)
     required: false
   agentfile:
     description: 'DEPRECATED: Use agent-file instead. Path to custom agent.toml file'
     required: false
-    deprecationMessage: 'The agentfile input has been deprecated. Please use agent-file instead.'
+    deprecationMessage: The agentfile input has been deprecated. Please use agent-file instead.
   key-value-pairs:
-    description: 'Additional key-value pairs as JSON object or multiline string (e.g., {"key1": "value1", "key2": "value2"} or key1=value1 key2=value2)'
+    description: 'Additional key-value pairs as JSON object or multiline string (e.g., {"key1": "value1",
+      "key2": "value2"} or key1=value1 key2=value2)'
     required: false
   qodo-version:
-    description: 'Version of @qodo/command to install (defaults to latest)'
+    description: Version of @qodo/command to install (defaults to latest)
     required: false
-    default: 'latest'
-
+    default: latest
 runs:
-  using: 'composite'
+  using: composite
   steps:
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '20'
+  - name: Command permanently retired
+    shell: bash
+    run: 'echo "::error::The legacy Qodo Command Action is permanently retired. Use a supported integration
+      with the current Qodo CLI."
 
-    - name: Install dependencies
-      shell: bash
-      run: |
-        # Install jq for JSON parsing
-        if ! command -v jq &> /dev/null; then
-          sudo apt-get update && sudo apt-get install -y jq
-        fi
-        
-        # Verify npx is available (should be installed with Node.js)
-        if ! command -v npx &> /dev/null; then
-          echo "Error: npx is not available. This should have been installed with Node.js."
-          exit 1
-        else
-          echo "npx is available: $(npx --version)"
-        fi
-        
-        # Install uv (which includes uvx)
-        if ! command -v uvx &> /dev/null; then
-          echo "Installing uv..."
-          curl -LsSf https://astral.sh/uv/install.sh | sh
-          # Add uv to PATH for all subsequent steps
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
-          # Add to PATH for the current step
-          export PATH="$HOME/.local/bin:$PATH"
-          # Verify installation
-          if command -v uvx &> /dev/null; then
-            echo "uvx is now available: $(uvx --version)"
-          else
-            echo "Error: Failed to install uvx"
-            exit 1
-          fi
-        else
-          echo "uvx is already available: $(uvx --version)"
-        fi
+      exit 1
 
-    - name: Install Qodo Command
-      shell: bash
-      run: |
-        if [ "${{ inputs.qodo-version }}" = "latest" ]; then
-          npm install -g @qodo/command
-        else
-          npm install -g @qodo/command@${{ inputs.qodo-version }}
-        fi
-
-    - name: Run Qodo Command
-      shell: bash
-      run: |
-        # Build the command
-        QODO_CMD="qodo --ci"
-        
-        # Add model if specified
-        if [ ! -z "${{ inputs.model }}" ]; then
-          QODO_CMD="$QODO_CMD --model=${{ inputs.model }}"
-        fi
-        
-        # Add agent-file - handle both new and old parameter names for backward compatibility
-        AGENT_FILE=""
-        if [ ! -z "${{ inputs.agent-file }}" ]; then
-          AGENT_FILE="${{ inputs.agent-file }}"
-        elif [ ! -z "${{ inputs.agentfile }}" ]; then
-          echo "::warning::The 'agentfile' input is deprecated. Please use 'agent-file' instead."
-          AGENT_FILE="${{ inputs.agentfile }}"
-        fi
-        
-        if [ ! -z "$AGENT_FILE" ]; then
-          QODO_CMD="$QODO_CMD --agent-file=$AGENT_FILE"
-        else
-          # Use default agent-file from action directory
-          QODO_CMD="$QODO_CMD --agent-file=${{ github.action_path }}/examples/agent.toml"
-        fi
-        
-        # Parse and add key-value pairs
-        if [ ! -z "${{ inputs.key-value-pairs }}" ]; then
-          # Check if input is JSON format
-          if echo "${{ inputs.key-value-pairs }}" | jq -e . >/dev/null 2>&1; then
-            # Parse JSON and convert to --set key=value format
-            PAIRS=$(echo "${{ inputs.key-value-pairs }}" | jq -r 'to_entries | .[] | "--set \(.key)=\(.value)"' | tr '\n' ' ')
-            QODO_CMD="$QODO_CMD $PAIRS"
-          else
-            # Assume it's in key=value format separated by spaces or newlines
-            # Convert each key=value to --set key=value
-            PAIRS=""
-            while IFS= read -r line; do
-              # Skip empty lines
-              if [ ! -z "$line" ]; then
-                # Extract key and value from key=value format
-                if [[ "$line" == *"="* ]]; then
-                  PAIRS="$PAIRS --set $line"
-                fi
-              fi
-            done <<< "${{ inputs.key-value-pairs }}"
-            QODO_CMD="$QODO_CMD $PAIRS"
-          fi
-        fi
-        
-        # Add the prompt at the end
-        QODO_CMD="$QODO_CMD \"${{ inputs.prompt }}\""
-        
-        # Echo the command for debugging
-        echo "Running: $QODO_CMD"
-        
-        # Execute the command
-        eval $QODO_CMD
-
+      '
 branding:
-  icon: 'cpu'
-  color: 'blue'
+  icon: cpu
+  color: blue
