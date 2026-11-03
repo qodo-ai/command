@@ -1,0 +1,21 @@
+name: Retirement bootstrap checks
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-retirement-bootstrap:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          persist-credentials: false
+      - name: Verify proposed retirement policy
+        run: |
+          python3 -m venv /tmp/command-retirement-check
+          /tmp/command-retirement-check/bin/pip install PyYAML==6.0.3
+          /tmp/command-retirement-check/bin/python -m unittest discover -s tests/retirement -v

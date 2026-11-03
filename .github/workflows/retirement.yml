@@ -1,0 +1,33 @@
+name: Command retirement guard
+
+on:
+  pull_request_target:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-retirement:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          allow-unsafe-pr-checkout: true
+          path: proposed
+          persist-credentials: false
+      - name: Load approved base retirement policy
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          ref: ${{ github.event.pull_request.base.sha || github.sha }}
+          path: approved
+          persist-credentials: false
+      - name: Verify permanent retirement
+        working-directory: ${{ runner.temp }}
+        run: |
+          python3 -I -m venv /tmp/command-retirement-check
+          /tmp/command-retirement-check/bin/python -I -m pip install PyYAML==6.0.3
+          COMMAND_RETIREMENT_ROOT="$GITHUB_WORKSPACE/proposed" /tmp/command-retirement-check/bin/python -I "$GITHUB_WORKSPACE/approved/tests/retirement/test_retirement.py" -v
